@@ -1,0 +1,315 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "n_primary_tokens": 399,
+  "n_layers": 28,
+  "d_hidden": 2048,
+  "vocab_size": 151936,
+  "tie_word_embeddings_config": true,
+  "storage_ptr_match": true,
+  "baseline_loss_per_tok": 2.0589579673268688,
+  "baseline_ppl": 7.837798311647404,
+  "lmhead_spectrum": {
+    "n_singvals": 2048,
+    "top_50": [
+      143.7593536376953,
+      33.202720642089844,
+      31.344024658203125,
+      30.26103401184082,
+      27.3634033203125,
+      26.788694381713867,
+      25.766151428222656,
+      24.960418701171875,
+      24.47776985168457,
+      24.393157958984375,
+      23.9006404876709,
+      23.535118103027344,
+      23.06353187561035,
+      22.924890518188477,
+      22.865367889404297,
+      22.76024627685547,
+      22.68109130859375,
+      22.57891845703125,
+      22.50131607055664,
+      22.438383102416992,
+      22.25722885131836,
+      22.210453033447266,
+      22.08316993713379,
+      21.970582962036133,
+      21.964458465576172,
+      21.874670028686523,
+      21.796754837036133,
+      21.758625030517578,
+      21.729578018188477,
+      21.6257266998291,
+      21.50506019592285,
+      21.4797420501709,
+      21.355764389038086,
+      21.287500381469727,
+      21.241960525512695,
+      21.192556381225586,
+      21.141027450561523,
+      21.005611419677734,
+      20.96696662902832,
+      20.898527145385742,
+      20.851491928100586,
+      20.821067810058594,
+      20.761877059936523,
+      20.69428062438965,
+      20.67685317993164,
+      20.62278175354004,
+      20.535507202148438,
+      20.463802337646484,
+      20.433961868286133,
+      20.42621612548828
+    ],
+    "ratio_s1_s0": 0.230960413813591,
+    "rank_for_99_var": 1992,
+    "rank_for_95_var": 1840,
+    "rank_for_90_var": 1675,
+    "rank_for_999_var": 2040,
+    "var_at_r_64": 0.1336010843515396,
+    "var_at_r_128": 0.19117768108844757,
+    "var_at_r_256": 0.28174299001693726,
+    "var_at_r_512": 0.42677900195121765
+  },
+  "row_norm_stats": {
+    "median": 1.6222922801971436,
+    "near_zero_threshold": 0.016222922801971434,
+    "near_zero_count": 0,
+    "near_zero_frac": 0.0,
+    "bottom_decile": 1.3555185794830322,
+    "max": 2.3504984378814697
+  },
+  "dead_row_confound": false,
+  "sweep_results": [
+    {
+      "r": 2048,
+      "loss_per_tok_nats": 2.05657452913984,
+      "ppl": 7.81913964856722,
+      "delta_loss_nats": -0.002383438187028908,
+      "top1_retention": 0.9673366546630859,
+      "top5_retention": 0.9814070463180542,
+      "kl_per_token_mean": 0.0016387749928981066,
+      "multi_passage": {
+        "nav": {
+          "delta": 0.002006299567945069
+        },
+        "bio": {
+          "delta": -0.005617179122625604
+        },
+        "tech": {
+          "delta": -0.012064353706910502
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 319553536,
+      "lm_head_bytes_bf16_rank": 630718464,
+      "compress_ratio_full_to_mixed": 1.9474979491386382
+    },
+    {
+      "r": 1024,
+      "loss_per_tok_nats": 22.015730508008794,
+      "ppl": 3641751222.591991,
+      "delta_loss_nats": 19.956772540681925,
+      "top1_retention": 0.005025125574320555,
+      "top5_retention": 0.007537689059972763,
+      "kl_per_token_mean": 20.216508865356445,
+      "multi_passage": {
+        "nav": {
+          "delta": 21.12452605276397
+        },
+        "bio": {
+          "delta": 17.00085703531901
+        },
+        "tech": {
+          "delta": 17.63788124949662
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 159776768,
+      "lm_head_bytes_bf16_rank": 315359232,
+      "compress_ratio_full_to_mixed": 3.8949958982772763
+    },
+    {
+      "r": 512,
+      "loss_per_tok_nats": 23.394644119032662,
+      "ppl": 14459885265.497637,
+      "delta_loss_nats": 21.335686151705794,
+      "top1_retention": 0.0,
+      "top5_retention": 0.0,
+      "kl_per_token_mean": 21.5996150970459,
+      "multi_passage": {
+        "nav": {
+          "delta": 22.971536193231138
+        },
+        "bio": {
+          "delta": 18.4684497608858
+        },
+        "tech": {
+          "delta": 20.7587006559077
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 79888384,
+      "lm_head_bytes_bf16_rank": 157679616,
+      "compress_ratio_full_to_mixed": 7.789991796554553
+    },
+    {
+      "r": 256,
+      "loss_per_tok_nats": 24.47490136228015,
+      "ppl": 42590683208.64688,
+      "delta_loss_nats": 22.41594339495328,
+      "top1_retention": 0.0,
+      "top5_retention": 0.0005025125574320555,
+      "kl_per_token_mean": 22.852378845214844,
+      "multi_passage": {
+        "nav": {
+          "delta": 24.448150480636443
+        },
+        "bio": {
+          "delta": 22.29842975092869
+        },
+        "tech": {
+          "delta": 23.42666437208038
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 39944192,
+      "lm_head_bytes_bf16_rank": 78839808,
+      "compress_ratio_full_to_mixed": 15.579983593109105
+    },
+    {
+      "r": 128,
+      "loss_per_tok_nats": 27.6830097754397,
+      "ppl": 1053363796785.2394,
+      "delta_loss_nats": 25.62405180811283,
+      "top1_retention": 0.0,
+      "top5_retention": 0.0,
+      "kl_per_token_mean": 26.152137756347656,
+      "multi_passage": {
+        "nav": {
+          "delta": 26.959319297713463
+        },
+        "bio": {
+          "delta": 25.35226275874119
+        },
+        "tech": {
+          "delta": 26.62566415059198
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 19972096,
+      "lm_head_bytes_bf16_rank": 39419904,
+      "compress_ratio_full_to_mixed": 31.15996718621821
+    },
+    {
+      "r": 64,
+      "loss_per_tok_nats": 28.08838135992462,
+      "ppl": 1579897930489.409,
+      "delta_loss_nats": 26.029423392597753,
+      "top1_retention": 0.0,
+      "top5_retention": 0.0,
+      "kl_per_token_mean": 26.5858154296875,
+      "multi_passage": {
+        "nav": {
+          "delta": 28.648094254310685
+        },
+        "bio": {
+          "delta": 27.42744371002796
+        },
+        "tech": {
+          "delta": 28.855133685869042
+        }
+      },
+      "lm_head_bytes_full_bf16": 622329856,
+      "lm_head_bytes_lhqd_mixed": 9986048,
+      "lm_head_bytes_bf16_rank": 19709952,
+      "compress_ratio_full_to_mixed": 62.31993437243642
+    }
+  ],
+  "sanity_gate_r2048_ok": true,
+  "wq_mid_layer_spectrum": {
+    "n_singvals": 2048,
+    "top_50": [
+      9.438450813293457,
+      7.361118316650391,
+      7.259915351867676,
+      6.581259250640869,
+      6.300797462463379,
+      6.191462993621826,
+      6.066248416900635,
+      5.669670104980469,
+      5.592589378356934,
+      5.564159393310547,
+      5.4741692543029785,
+      5.4215288162231445,
+      5.302560329437256,
+      5.249067306518555,
+      5.201792240142822,
+      5.115016937255859,
+      5.089114665985107,
+      5.041469573974609,
+      4.958632469177246,
+      4.9072465896606445,
+      4.865306377410889,
+      4.836488723754883,
+      4.788385391235352,
+      4.746937274932861,
+      4.709313869476318,
+      4.668315410614014,
+      4.653511047363281,
+      4.609970569610596,
+      4.560308456420898,
+      4.540891170501709,
+      4.508505821228027,
+      4.480964183807373,
+      4.439396381378174,
+      4.409236907958984,
+      4.360428810119629,
+      4.329376220703125,
+      4.312760353088379,
+      4.281275749206543,
+      4.255730628967285,
+      4.247872829437256,
+      4.214470863342285,
+      4.1798200607299805,
+      4.158962726593018,
+      4.141072750091553,
+      4.132761478424072,
+      4.108913898468018,
+      4.087828159332275,
+      4.0624566078186035,
+      4.0543317794799805,
+      4.046152114868164
+    ],
+    "ratio_s1_s0": 0.7799074649810791,
+    "rank_for_99_var": 1293,
+    "rank_for_95_var": 895,
+    "rank_for_90_var": 683,
+    "rank_for_999_var": 1658,
+    "var_at_r_64": 0.30511602759361267,
+    "var_at_r_128": 0.4537101686000824,
+    "var_at_r_256": 0.6399440169334412,
+    "var_at_r_512": 0.8320899605751038,
+    "layer": 14
+  },
+  "verdict": "EMBED-TIED \u2014 measured embed_tokens spectrum, not lm_head; reframe",
+  "stage6_amendments_applied": [
+    "tied-embedding hard gate (data_ptr check)",
+    "per-row L2 norm histogram for dead-row confound",
+    "top-1/top-5 argmax retention per rank",
+    "per-token KL divergence vs full-rank",
+    "multi-passage NLL (3 disjoint passages)",
+    "sanity gate at r=2048 (<0.005 nats round-trip)",
+    "W_Q spectrum comparison (optional flag)"
+  ],
+  "cf9_preconditions": [
+    "lm_head WEIGHT spectrum, not logit-matrix spectrum (arXiv:2510.24966)",
+    "tied_embeddings hard-gates the experiment interpretation",
+    "argmax/KL deployment metrics (NLL alone insufficient)",
+    "multi-passage robustness check (single-passage WDLA-adjacent risk)",
+    "no calibration fitting; WDLA ill-conditioning N/A"
+  ],
+  "godey_artzi_note": "arXiv:2603.10145 (March 2026) predicts lm_head suppresses gradient rank during training. A concentrated weight spectrum here would be consistent with that mechanism but is not independently caused by it; framing must be honest about this prior.",
+  "timestamp": "2026-05-08T22:38:04.315766+00:00"
+}

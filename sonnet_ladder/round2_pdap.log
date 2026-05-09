@@ -1,0 +1,15 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading Qwen/Qwen3-1.7B-Base ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 310/310 [00:00<00:00, 6633.44it/s]
+  n_layers=28  d=2048
+  sampled layers: [2, 6, 10, 14, 19, 23, 27]
+  total prompts: 200
+
+Wrote experiments\stage0\ladder\round2_pdap\pdap_results.json
+Wrote experiments\stage0\ladder\round2_pdap\pdap_plot.png
+Wrote experiments\stage0\ladder\round2_pdap\summary.md
+
+VERDICT: GO (token-dynamic)

@@ -1,0 +1,310 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "n_layers": 28,
+  "d_hidden": 2048,
+  "intermediate_size": 6144,
+  "n_tokens_total": 566,
+  "total_neurons": 172032,
+  "thresholds": {
+    "std_dead_const": 0.05,
+    "mean_dead": 0.05,
+    "std_loose": 0.1
+  },
+  "global": {
+    "frac_dead_neurons": 0.012608119419642858,
+    "frac_const_neurons": 0.002784365699404762,
+    "frac_foldable_total": 0.01539248511904762,
+    "frac_loose": 0.13314964657738096,
+    "frac_live": 0.8514578683035714,
+    "median_std": 0.31563639640808105,
+    "p10_std": 0.08210159838199615,
+    "p90_std": 1.0335924625396729
+  },
+  "per_layer": [
+    {
+      "layer": 0,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0035807291666666665,
+      "frac_foldable": 0.0035807291666666665,
+      "frac_live": 0.9656575520833334,
+      "mean_std": 0.16683530807495117,
+      "median_std": 0.15582871437072754,
+      "p90_std": 0.22867198288440704
+    },
+    {
+      "layer": 1,
+      "frac_dead_neurons": 0.3077799479166667,
+      "frac_const_neurons": 0.05322265625,
+      "frac_foldable": 0.3610026041666667,
+      "frac_live": 0.27880859375,
+      "mean_std": 0.09766235202550888,
+      "median_std": 0.0610886849462986,
+      "p90_std": 0.22883760929107666
+    },
+    {
+      "layer": 2,
+      "frac_dead_neurons": 0.007975260416666666,
+      "frac_const_neurons": 0.012044270833333334,
+      "frac_foldable": 0.02001953125,
+      "frac_live": 0.4443359375,
+      "mean_std": 0.12948782742023468,
+      "median_std": 0.09068042784929276,
+      "p90_std": 0.24298697710037231
+    },
+    {
+      "layer": 3,
+      "frac_dead_neurons": 0.005045572916666667,
+      "frac_const_neurons": 0.0029296875,
+      "frac_foldable": 0.007975260416666668,
+      "frac_live": 0.4401041666666667,
+      "mean_std": 0.12686192989349365,
+      "median_std": 0.09287133067846298,
+      "p90_std": 0.2325068712234497
+    },
+    {
+      "layer": 4,
+      "frac_dead_neurons": 0.0009765625,
+      "frac_const_neurons": 0.00146484375,
+      "frac_foldable": 0.00244140625,
+      "frac_live": 0.5037434895833334,
+      "mean_std": 0.14009691774845123,
+      "median_std": 0.10058243572711945,
+      "p90_std": 0.2605636715888977
+    },
+    {
+      "layer": 5,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.8821614583333334,
+      "mean_std": 0.20044636726379395,
+      "median_std": 0.1875356137752533,
+      "p90_std": 0.3161361813545227
+    },
+    {
+      "layer": 6,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.00016276041666666666,
+      "frac_foldable": 0.00016276041666666666,
+      "frac_live": 0.7594401041666666,
+      "mean_std": 0.1995004564523697,
+      "median_std": 0.17632454633712769,
+      "p90_std": 0.35094141960144043
+    },
+    {
+      "layer": 7,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.004069010416666667,
+      "frac_foldable": 0.004069010416666667,
+      "frac_live": 0.6591796875,
+      "mean_std": 0.18685388565063477,
+      "median_std": 0.1489817202091217,
+      "p90_std": 0.34859901666641235
+    },
+    {
+      "layer": 8,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0003255208333333333,
+      "frac_foldable": 0.0003255208333333333,
+      "frac_live": 0.814453125,
+      "mean_std": 0.22652967274188995,
+      "median_std": 0.20286016166210175,
+      "p90_std": 0.40429723262786865
+    },
+    {
+      "layer": 9,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.8307291666666666,
+      "mean_std": 0.26106464862823486,
+      "median_std": 0.22900637984275818,
+      "p90_std": 0.4780535399913788
+    },
+    {
+      "layer": 10,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.8878580729166666,
+      "mean_std": 0.3138206899166107,
+      "median_std": 0.2845931649208069,
+      "p90_std": 0.5560863018035889
+    },
+    {
+      "layer": 11,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9200846354166666,
+      "mean_std": 0.3385835587978363,
+      "median_std": 0.3150436282157898,
+      "p90_std": 0.5842732787132263
+    },
+    {
+      "layer": 12,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.943359375,
+      "mean_std": 0.3657948970794678,
+      "median_std": 0.3427736759185791,
+      "p90_std": 0.6158358454704285
+    },
+    {
+      "layer": 13,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9606119791666666,
+      "mean_std": 0.3931747376918793,
+      "median_std": 0.36658158898353577,
+      "p90_std": 0.6549222469329834
+    },
+    {
+      "layer": 14,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9759114583333334,
+      "mean_std": 0.4356642961502075,
+      "median_std": 0.41036325693130493,
+      "p90_std": 0.7107388973236084
+    },
+    {
+      "layer": 15,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9710286458333334,
+      "mean_std": 0.4753200113773346,
+      "median_std": 0.4397656321525574,
+      "p90_std": 0.8084948658943176
+    },
+    {
+      "layer": 16,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9861653645833334,
+      "mean_std": 0.5909664034843445,
+      "median_std": 0.54820716381073,
+      "p90_std": 0.9817289710044861
+    },
+    {
+      "layer": 17,
+      "frac_dead_neurons": 0.0,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0,
+      "frac_live": 0.9718424479166666,
+      "mean_std": 0.5818473696708679,
+      "median_std": 0.5381197929382324,
+      "p90_std": 1.023287296295166
+    },
+    {
+      "layer": 18,
+      "frac_dead_neurons": 0.0011393229166666667,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0011393229166666667,
+      "frac_live": 0.9542643229166666,
+      "mean_std": 0.6125255227088928,
+      "median_std": 0.5642071962356567,
+      "p90_std": 1.1157686710357666
+    },
+    {
+      "layer": 19,
+      "frac_dead_neurons": 0.00244140625,
+      "frac_const_neurons": 0.00016276041666666666,
+      "frac_foldable": 0.0026041666666666665,
+      "frac_live": 0.9518229166666666,
+      "mean_std": 0.6855762600898743,
+      "median_std": 0.6172777414321899,
+      "p90_std": 1.2919833660125732
+    },
+    {
+      "layer": 20,
+      "frac_dead_neurons": 0.00537109375,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.00537109375,
+      "frac_live": 0.9348958333333334,
+      "mean_std": 0.689598798751831,
+      "median_std": 0.551323413848877,
+      "p90_std": 1.4547429084777832
+    },
+    {
+      "layer": 21,
+      "frac_dead_neurons": 0.0032552083333333335,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0032552083333333335,
+      "frac_live": 0.9334309895833334,
+      "mean_std": 0.6777052879333496,
+      "median_std": 0.5173192024230957,
+      "p90_std": 1.4783074855804443
+    },
+    {
+      "layer": 22,
+      "frac_dead_neurons": 0.0026041666666666665,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0026041666666666665,
+      "frac_live": 0.9599609375,
+      "mean_std": 0.7065040469169617,
+      "median_std": 0.5366775989532471,
+      "p90_std": 1.5082122087478638
+    },
+    {
+      "layer": 23,
+      "frac_dead_neurons": 0.0022786458333333335,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0022786458333333335,
+      "frac_live": 0.9729817708333334,
+      "mean_std": 0.7321498990058899,
+      "median_std": 0.5556743741035461,
+      "p90_std": 1.538735032081604
+    },
+    {
+      "layer": 24,
+      "frac_dead_neurons": 0.0011393229166666667,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0011393229166666667,
+      "frac_live": 0.9894205729166666,
+      "mean_std": 0.8524066805839539,
+      "median_std": 0.6820247769355774,
+      "p90_std": 1.7013953924179077
+    },
+    {
+      "layer": 25,
+      "frac_dead_neurons": 0.0013020833333333333,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0013020833333333333,
+      "frac_live": 0.9894205729166666,
+      "mean_std": 1.0015578269958496,
+      "median_std": 0.8208020925521851,
+      "p90_std": 1.971259355545044
+    },
+    {
+      "layer": 26,
+      "frac_dead_neurons": 0.0006510416666666666,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.0006510416666666666,
+      "frac_live": 0.9925130208333334,
+      "mean_std": 1.0863324403762817,
+      "median_std": 0.90572190284729,
+      "p90_std": 2.0886871814727783
+    },
+    {
+      "layer": 27,
+      "frac_dead_neurons": 0.011067708333333334,
+      "frac_const_neurons": 0.0,
+      "frac_foldable": 0.011067708333333334,
+      "frac_live": 0.9666341145833334,
+      "mean_std": 0.8487082123756409,
+      "median_std": 0.6263864636421204,
+      "p90_std": 1.6336166858673096
+    }
+  ],
+  "verdict": "NO-GO (<5% neurons foldable)",
+  "timestamp": "2026-05-08T20:38:43.033087+00:00",
+  "scap_reference": "arXiv:2412.07174 \u2014 GLU activations are 'centered'.",
+  "r1_reference": "Round 1 finding: W_up dominates SwiGLU firing-rank.",
+  "r3_reference": "Round 3 finding: W_gate is full-rank linear-algebra; SDZC tests function-output near-constancy."
+}

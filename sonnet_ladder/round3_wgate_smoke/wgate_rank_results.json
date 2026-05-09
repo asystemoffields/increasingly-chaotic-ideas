@@ -1,0 +1,43 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "n_eval_tokens": 455,
+  "n_layers": 28,
+  "d_hidden": 2048,
+  "intermediate_size": 6144,
+  "k_values": [
+    16,
+    128
+  ],
+  "baseline_loss_per_tok": 2.4667810112369217,
+  "baseline_ppl": 11.784451713848076,
+  "verdict": "MID (layer-sensitivity follow-up needed; per-layer adaptive K)",
+  "results": [
+    {
+      "K": 16,
+      "K_frac_d_in": 0.0078125,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 9.601647465239537,
+      "ppl": 14789.12607783858,
+      "delta_loss_nats": 7.134866454002616,
+      "delta_ppl": 14777.341626124733,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 262144,
+      "compression_ratio_vs_bf16": 96.0
+    },
+    {
+      "K": 128,
+      "K_frac_d_in": 0.0625,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 9.865221468887665,
+      "ppl": 19249.13625593449,
+      "delta_loss_nats": 7.398440457650743,
+      "delta_ppl": 19237.35180422064,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 2097152,
+      "compression_ratio_vs_bf16": 12.0
+    }
+  ],
+  "timestamp": "2026-05-08T19:43:57.492277+00:00",
+  "stage6_note": "CSMF (polynomial silu) was Stage 5 pick but Stage 6 found math flaw: polynomial substitution does not eliminate W_gate. Idea 12 (this experiment) is the correct mechanism \u2014 low-rank SVD on W_gate while keeping W_up at full precision.",
+  "aero_reference": "AERO (arXiv:2410.13060) eliminates activations entirely and folds W_gate+W_up; we do not go that far, only compress W_gate via low-rank."
+}

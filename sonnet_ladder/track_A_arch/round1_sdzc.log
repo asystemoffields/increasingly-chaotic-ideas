@@ -1,0 +1,17 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading Qwen/Qwen3-1.7B-Base ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 310/310 [00:00<00:00, 4366.15it/s]
+  n_layers=28  d=2048  intermediate=6144
+Running forward passes on 10 passages ...
+  total tokens: 566
+
+Computing per-neuron gate statistics ...
+
+Wrote experiments\stage0\ladder\track_A_arch\round1_sdzc\sdzc_results.json
+Wrote experiments\stage0\ladder\track_A_arch\round1_sdzc\sdzc_plot.png
+Wrote experiments\stage0\ladder\track_A_arch\round1_sdzc\summary.md
+
+VERDICT: NO-GO (<5% neurons foldable)  (foldable=1.5%, dead=1.3%, const=0.3%, live=85.1%)

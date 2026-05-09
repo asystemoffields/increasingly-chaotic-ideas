@@ -1,0 +1,55 @@
+{
+  "platform": "win32",
+  "file_path": "C:\\Users\\power\\AppData\\Local\\Temp\\nocturnal_pf_bench.bin",
+  "file_size_gb": 8.0,
+  "n_faults_per_run": 5000,
+  "page_size": 4096,
+  "extent_test_size": 1048576,
+  "timestamp": "2026-05-09T00:18:13.312003+00:00",
+  "single_thread_random": {
+    "n": 5000,
+    "min_us": 0.5,
+    "p10_us": 121.9,
+    "median_us": 137.0,
+    "p90_us": 158.5,
+    "p99_us": 201.6,
+    "max_us": 703.9,
+    "mean_us": 137.98136
+  },
+  "multi_thread_random": {
+    "threads_4": {
+      "n": 5000,
+      "min_us": 0.7,
+      "p10_us": 2.8,
+      "median_us": 119.9,
+      "p90_us": 140.2,
+      "p99_us": 184.5,
+      "max_us": 402.6,
+      "mean_us": 94.02432
+    }
+  },
+  "extent_prefetch": {
+    "first_page": {
+      "n": 200,
+      "min_us": 3.7,
+      "p10_us": 122.6,
+      "median_us": 137.6,
+      "p90_us": 158.9,
+      "p99_us": 194.7,
+      "max_us": 196.2,
+      "mean_us": 139.2175
+    },
+    "same_extent_followon": {
+      "n": 1400,
+      "min_us": 1.0,
+      "p10_us": 1.2,
+      "median_us": 1.9,
+      "p90_us": 3.0,
+      "p99_us": 4.7,
+      "max_us": 123.5,
+      "mean_us": 2.1344285714285713
+    }
+  },
+  "branch_decision": "E0b (realistic) \u2014 pivot to NEXTENT+ZIPFLOCK+iGPU overlap",
+  "nextent_engaged": true
+}

@@ -1,0 +1,46 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading Qwen/Qwen3-1.7B-Base ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 310/310 [00:00<00:00, 3997.04it/s]
+  n_layers=28  d=2048  r=6144
+  n_eval_tokens=455
+
+Running baseline ...
+  baseline: NLL/tok = 2.4668  PPL = 11.784
+
+Saving baseline W_up weights ...
+
+Rank K=4 ...
+  K=4  NLL/tok=16.5525  \u0394NLL=+14.0858  PPL=15441193.324  \u0394PPL=+15441181.539  compress=384.00� vs bf16
+
+Rank K=8 ...
+  K=8  NLL/tok=17.1786  \u0394NLL=+14.7118  PPL=28876940.070  \u0394PPL=+28876928.286  compress=192.00� vs bf16
+
+Rank K=16 ...
+  K=16  NLL/tok=14.5692  \u0394NLL=+12.1024  PPL=2124853.314  \u0394PPL=+2124841.530  compress=96.00� vs bf16
+
+Rank K=32 ...
+  K=32  NLL/tok=12.6661  \u0394NLL=+10.1993  PPL=316815.813  \u0394PPL=+316804.029  compress=48.00� vs bf16
+
+Rank K=64 ...
+  K=64  NLL/tok=9.5068  \u0394NLL=+7.0401  PPL=13451.540  \u0394PPL=+13439.755  compress=24.00� vs bf16
+
+Rank K=128 ...
+  K=128  NLL/tok=11.2903  \u0394NLL=+8.8235  PPL=80037.789  \u0394PPL=+80026.005  compress=12.00� vs bf16
+
+Rank K=256 ...
+  K=256  NLL/tok=10.8637  \u0394NLL=+8.3969  PPL=52246.188  \u0394PPL=+52234.403  compress=6.00� vs bf16
+
+Rank K=512 ...
+  K=512  NLL/tok=10.8526  \u0394NLL=+8.3858  PPL=51666.000  \u0394PPL=+51654.215  compress=3.00� vs bf16
+
+Rank K=1024 ...
+  K=1024  NLL/tok=4.8088  \u0394NLL=+2.3420  PPL=122.584  \u0394PPL=+110.799  compress=1.50� vs bf16
+
+Wrote experiments\stage0\ladder\track_B_compress\round4_wup_rank\wup_rank_results.json
+Wrote experiments\stage0\ladder\track_B_compress\round4_wup_rank\wup_rank_plot.png
+Wrote experiments\stage0\ladder\track_B_compress\round4_wup_rank\summary.md
+
+VERDICT: NO-GO (W_up is genuinely full-rank; rank reduction is not the path)

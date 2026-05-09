@@ -1,0 +1,55 @@
+Page-fault benchmark on C:\Users\power\AppData\Local\Temp\nocturnal_pf_bench.bin
+  creating C:\Users\power\AppData\Local\Temp\nocturnal_pf_bench.bin of size 8.0 GiB (this writes data, may take a minute)...
+    0.2 / 8.0 GiB
+    0.5 / 8.0 GiB
+    0.8 / 8.0 GiB
+    1.0 / 8.0 GiB
+    1.2 / 8.0 GiB
+    1.5 / 8.0 GiB
+    1.8 / 8.0 GiB
+    2.0 / 8.0 GiB
+    2.2 / 8.0 GiB
+    2.5 / 8.0 GiB
+    2.8 / 8.0 GiB
+    3.0 / 8.0 GiB
+    3.2 / 8.0 GiB
+    3.5 / 8.0 GiB
+    3.8 / 8.0 GiB
+    4.0 / 8.0 GiB
+    4.2 / 8.0 GiB
+    4.5 / 8.0 GiB
+    4.8 / 8.0 GiB
+    5.0 / 8.0 GiB
+    5.2 / 8.0 GiB
+    5.5 / 8.0 GiB
+    5.8 / 8.0 GiB
+    6.0 / 8.0 GiB
+    6.2 / 8.0 GiB
+    6.5 / 8.0 GiB
+    6.8 / 8.0 GiB
+    7.0 / 8.0 GiB
+    7.2 / 8.0 GiB
+    7.5 / 8.0 GiB
+    7.8 / 8.0 GiB
+    8.0 / 8.0 GiB
+
+=== Single-thread random fault latency ===
+  evicting cache via 2048 MB pressure buffer...
+  n=5000  median=137.0 us  p10=121.9  p90=158.5  p99=201.6  max=703.9
+
+  BRANCH: E0b (realistic) — pivot to NEXTENT+ZIPFLOCK+iGPU overlap
+
+=== Multi-thread random fault latency ===
+  evicting cache via 2048 MB pressure buffer...
+  threads=4  n=5000  median=119.9 us  p99=184.5
+
+=== Extent prefetch latency ===
+  evicting cache via 2048 MB pressure buffer...
+  first-page-of-extent:    median=137.6 us  p99=194.7
+  same-extent followon:    median=1.9 us  p99=4.7
+  \u2713 Cache Manager prefetch ENGAGED — followon is 72.4× faster than first-page
+
+Wrote experiments\stage0\opus_pipeline\round1\e0_nvme_pagefault_results.json
+
+FINAL BRANCH: E0b (realistic) — pivot to NEXTENT+ZIPFLOCK+iGPU overlap
+NEXTENT engaged: True

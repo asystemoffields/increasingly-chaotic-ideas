@@ -1,0 +1,46 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading Qwen/Qwen3-1.7B-Base ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 4415.79it/s]
+  n_layers=28  d=2048
+
+Step 0 — Tied-embedding gate:
+  config.tie_word_embeddings = True
+  storage tied (data_ptr match) = True
+  GATE TRIPPED: lm_head is tied to embed_tokens. The experiment measures the embedding matrix, not an independent output projection. Proceeding but flagging as 'embed_tokens spectrum study' rather than LHQD.
+  lm_head shape = (151936, 2048)  dtype=torch.bfloat16
+  primary passage tokens=399
+  nav passage tokens=100
+  bio passage tokens=103
+  tech passage tokens=98
+
+Baseline forward ...
+  baseline: NLL/tok = 2.0590  PPL = 7.838
+
+Step 1 — SVD of lm_head (fp32) ...
+  SVD done in 24.8s
+  U=(151936, 2048)  S=(2048,)  Vt=(2048, 2048)
+  rank_for_99_var=1992  rank_for_95_var=1840  rank_for_90_var=1675
+  var@r=128=0.1912  var@r=256=0.2817  var@r=512=0.4268
+
+Step 2 — Per-row norm distribution ...
+  median_norm=1.6223  near_zero_count=0 (0.00% of 151936 rows)
+  bottom_decile_norm=1.3555  max=2.3505
+
+Step 3 — Reconstruction sweep ...
+  r= 2048  \u0394NLL=-0.0024  PPL=7.819  top1_ret=0.967  top5_ret=0.981  KL=0.0016  multi_max_\u0394=+0.0020
+  r= 1024  \u0394NLL=+19.9568  PPL=3641751222.592  top1_ret=0.005  top5_ret=0.008  KL=20.2165  multi_max_\u0394=+21.1245
+  r=  512  \u0394NLL=+21.3357  PPL=14459885265.498  top1_ret=0.000  top5_ret=0.000  KL=21.5996  multi_max_\u0394=+22.9715
+  r=  256  \u0394NLL=+22.4159  PPL=42590683208.647  top1_ret=0.000  top5_ret=0.001  KL=22.8524  multi_max_\u0394=+24.4482
+  r=  128  \u0394NLL=+25.6241  PPL=1053363796785.239  top1_ret=0.000  top5_ret=0.000  KL=26.1521  multi_max_\u0394=+26.9593
+  r=   64  \u0394NLL=+26.0294  PPL=1579897930489.409  top1_ret=0.000  top5_ret=0.000  KL=26.5858  multi_max_\u0394=+28.8551
+
+Step 4 — Sanity gate at r=2048: \u0394NLL=-0.00238 (PASS)
+
+Step 5 — W_Q spectrum at mid-layer (comparison) ...
+  W_Q L14: r_99=1293  r_95=895  var@r=128=0.4537  var@r=256=0.6399
+
+Wrote experiments\stage0\ladder\track_B_compress\round6_lhqd\lhqd_results.json
+Wrote experiments\stage0\ladder\track_B_compress\round6_lhqd\lhqd_plot.png
+Wrote experiments\stage0\ladder\track_B_compress\round6_lhqd\summary.md
+
+VERDICT: EMBED-TIED — measured embed_tokens spectrum, not lm_head; reframe

@@ -1,0 +1,75 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+calib passages: 9, eval passages: 3
+
+Phase 1a: source model calibration ...
+  loading Qwen/Qwen3-0.6B-Base (torch.float32) ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/310 [00:01<08:02,  1.56s/it]
+Loading weights:  70%|#######   | 218/310 [00:01<00:00, 176.37it/s]
+Loading weights:  99%|#########9| 308/310 [00:02<00:00, 141.64it/s]
+Loading weights: 100%|##########| 310/310 [00:02<00:00, 121.34it/s]
+    n_layers=28  hidden=1024
+  src n_layers=28  hidden=1024  n_tokens=417
+Phase 1b: source model eval ...
+  loading Qwen/Qwen3-0.6B-Base (torch.float32) ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/310 [00:00<03:30,  1.47it/s]
+Loading weights:  65%|######4   | 201/310 [00:00<00:00, 333.41it/s]
+Loading weights:  95%|#########5| 295/310 [00:01<00:00, 174.47it/s]
+Loading weights: 100%|##########| 310/310 [00:01<00:00, 175.34it/s]
+    n_layers=28  hidden=1024
+  src eval n_tokens=108
+Phase 1c: target model calibration ...
+  loading Qwen/Qwen3-1.7B-Base (torch.bfloat16) ...
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 310/310 [00:00<00:00, 3319.18it/s]
+
+    n_layers=28  hidden=2048
+  tgt n_layers=28  hidden=2048  n_tokens=417
+Phase 1d: target model eval ...
+  loading Qwen/Qwen3-1.7B-Base (torch.bfloat16) ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 310/310 [00:00<00:00, 6521.52it/s]
+    n_layers=28  hidden=2048
+  tgt eval n_tokens=108
+
+Phase 2-4: fit, evaluate, compress ...
+  L 0  R�_calib=1.000  R�_eval=0.319  cos_eval=0.582
+  L 1  R�_calib=1.000  R�_eval=-0.431  cos_eval=0.672
+  L 2  R�_calib=1.000  R�_eval=0.030  cos_eval=0.690
+  L 3  R�_calib=1.000  R�_eval=-3.864  cos_eval=0.115
+  L 4  R�_calib=1.000  R�_eval=-10.504  cos_eval=0.086
+  L 5  R�_calib=1.000  R�_eval=-76.632  cos_eval=0.040
+  L 6  R�_calib=1.000  R�_eval=-506.577  cos_eval=-0.002
+  L 7  R�_calib=1.000  R�_eval=-380.035  cos_eval=0.015
+  L 8  R�_calib=1.000  R�_eval=-8.235  cos_eval=-0.014
+  L 9  R�_calib=1.000  R�_eval=-4.297  cos_eval=0.054
+  L10  R�_calib=1.000  R�_eval=-10.698  cos_eval=-0.166
+  L11  R�_calib=1.000  R�_eval=-10.757  cos_eval=0.105
+  L12  R�_calib=1.000  R�_eval=-9.446  cos_eval=0.138
+  L13  R�_calib=1.000  R�_eval=-3487.339  cos_eval=0.015
+  L14  R�_calib=1.000  R�_eval=-977.182  cos_eval=0.036
+  L15  R�_calib=1.000  R�_eval=-327.308  cos_eval=-0.085
+  L16  R�_calib=1.000  R�_eval=-466.864  cos_eval=-0.039
+  L17  R�_calib=1.000  R�_eval=-190.039  cos_eval=0.125
+  L18  R�_calib=1.000  R�_eval=-960.774  cos_eval=0.092
+  L19  R�_calib=1.000  R�_eval=-1345.611  cos_eval=0.024
+  L20  R�_calib=1.000  R�_eval=-2007.244  cos_eval=-0.067
+  L21  R�_calib=1.000  R�_eval=-15729.932  cos_eval=-0.050
+  L22  R�_calib=1.000  R�_eval=-11198.182  cos_eval=-0.081
+  L23  R�_calib=1.000  R�_eval=-2669.093  cos_eval=-0.033
+  L24  R�_calib=1.000  R�_eval=-13738.736  cos_eval=0.037
+  L25  R�_calib=1.000  R�_eval=-12329.113  cos_eval=-0.027
+  L26  R�_calib=1.000  R�_eval=-23707.566  cos_eval=-0.029
+  L27  R�_calib=1.000  R�_eval=-118121.531  cos_eval=0.210
+
+Wrote experiments\stage0\ladder\track_A_arch\round2_wdla\wdla_results.json
+Wrote experiments\stage0\ladder\track_A_arch\round2_wdla\wdla_plot.png
+
+VERDICT: NO-GO (information-theoretic bound binding; small model lacks info)
+  deep R� mean: -11515.968 (gate: > 0.85)
+  deep R� min:  -118121.531 (gate: > 0.65)

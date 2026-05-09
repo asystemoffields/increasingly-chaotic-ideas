@@ -1,0 +1,69 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "n_eval_tokens": 455,
+  "n_layers": 28,
+  "d_hidden": 2048,
+  "intermediate_size": 6144,
+  "k_values": [
+    2048,
+    1024,
+    512,
+    256
+  ],
+  "baseline_loss_per_tok": 2.4667810112369217,
+  "baseline_ppl": 11.784451713848076,
+  "verdict": "NO-GO (W_gate is genuinely full-rank; rank reduction is not the path)",
+  "results": [
+    {
+      "K": 2048,
+      "K_frac_d_in": 1.0,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 2.4689468182131056,
+      "ppl": 11.810002220325496,
+      "delta_loss_nats": 0.0021658069761838483,
+      "delta_ppl": 0.025550506477419077,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 33554432,
+      "compression_ratio_vs_bf16": 0.75
+    },
+    {
+      "K": 1024,
+      "K_frac_d_in": 0.5,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 3.237651808146338,
+      "ppl": 25.473834011415985,
+      "delta_loss_nats": 0.7708707969094162,
+      "delta_ppl": 13.689382297567908,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 16777216,
+      "compression_ratio_vs_bf16": 1.5
+    },
+    {
+      "K": 512,
+      "K_frac_d_in": 0.25,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 6.041079080052313,
+      "ppl": 420.3463776372958,
+      "delta_loss_nats": 3.5742980688153914,
+      "delta_ppl": 408.56192592344775,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 8388608,
+      "compression_ratio_vs_bf16": 3.0
+    },
+    {
+      "K": 256,
+      "K_frac_d_in": 0.125,
+      "n_eval_tokens": 454,
+      "loss_per_tok_nats": 8.625518933266795,
+      "ppl": 5572.053482358145,
+      "delta_loss_nats": 6.158737922029873,
+      "delta_ppl": 5560.269030644296,
+      "wgate_bytes_per_layer_orig": 25165824,
+      "wgate_bytes_per_layer_rankK": 4194304,
+      "compression_ratio_vs_bf16": 6.0
+    }
+  ],
+  "timestamp": "2026-05-08T19:53:27.433326+00:00",
+  "stage6_note": "CSMF (polynomial silu) was Stage 5 pick but Stage 6 found math flaw: polynomial substitution does not eliminate W_gate. Idea 12 (this experiment) is the correct mechanism \u2014 low-rank SVD on W_gate while keeping W_up at full precision.",
+  "aero_reference": "AERO (arXiv:2410.13060) eliminates activations entirely and folds W_gate+W_up; we do not go that far, only compress W_gate via low-rank."
+}

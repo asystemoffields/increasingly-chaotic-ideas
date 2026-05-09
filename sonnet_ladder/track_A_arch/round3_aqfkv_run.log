@@ -1,0 +1,59 @@
+C:\Users\power\documents\Nocturnal_One\.venv\Lib\site-packages\huggingface_hub\file_download.py:138: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\power\.cache\huggingface\hub\models--Qwen--Qwen3-1.7B-Base. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading Qwen/Qwen3-1.7B-Base ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 5550.53it/s]
+  n_layers=28  d=2048  n_q_heads=16  n_kv_heads=8  head_dim=128
+  W_Q[0] shape=(2048, 2048)  dtype=torch.bfloat16
+  W_K[0] shape=(1024, 2048)  dtype=torch.bfloat16
+  n_eval_tokens=455
+
+Running baseline ...
+  baseline: NLL/tok = 2.4668  PPL = 11.784
+
+Spectrum diagnostic on W_Q at layers [0, 14, 27] ...
+  W_Q L0: r_99=1493  r_95=1143  r_90=935  var@r=128=0.2940  var@r=256=0.4614
+  W_Q L14: r_99=1293  r_95=895  r_90=683  var@r=128=0.4537  var@r=256=0.6399
+  W_Q L27: r_99=1496  r_95=1142  r_90=932  var@r=128=0.3153  var@r=256=0.4771
+  W_K L0: r_99=895  r_95=722  var@r=128=0.4033
+  W_K L14: r_99=814  r_95=600  var@r=128=0.5282
+  W_K L27: r_99=912  r_95=739  var@r=128=0.3728
+
+Saving baseline W_Q / W_K weights ...
+
+=== Sweep 1: Global W_Q SVD ===
+  K= 2048  NLL/tok=2.4654  \u0394NLL=-0.0014  PPL=11.768  compress=0.50×
+  K= 1024  NLL/tok=2.4977  \u0394NLL=+0.0309  PPL=12.154  compress=1.00×
+  K=  512  NLL/tok=2.6629  \u0394NLL=+0.1961  PPL=14.337  compress=2.00×
+  K=  256  NLL/tok=2.9777  \u0394NLL=+0.5109  PPL=19.642  compress=4.00×
+  K=  128  NLL/tok=3.4503  \u0394NLL=+0.9835  PPL=31.510  compress=8.00×
+  K=   64  NLL/tok=3.8347  \u0394NLL=+1.3679  PPL=46.278  compress=16.00×
+  K=   32  NLL/tok=4.2698  \u0394NLL=+1.8031  PPL=71.511  compress=32.00×
+  K=   16  NLL/tok=4.8883  \u0394NLL=+2.4215  PPL=132.728  compress=64.00×
+
+  K=2048 sanity gate: \u0394NLL=-0.0014 (OK)
+
+=== Sweep 2: Per-Head W_Q SVD ===
+  K_per_head=128  NLL/tok=2.4663  \u0394NLL=-0.0005  PPL=11.779  compress=0.94×
+  K_per_head= 96  NLL/tok=3.4099  \u0394NLL=+0.9431  PPL=30.262  compress=1.25×
+  K_per_head= 64  NLL/tok=4.0011  \u0394NLL=+1.5343  PPL=54.658  compress=1.88×
+  K_per_head= 32  NLL/tok=4.9914  \u0394NLL=+2.5247  PPL=147.149  compress=3.76×
+  K_per_head= 16  NLL/tok=5.7430  \u0394NLL=+3.2762  PPL=311.994  compress=7.53×
+  K_per_head=  8  NLL/tok=6.2023  \u0394NLL=+3.7355  PPL=493.869  compress=15.06×
+
+  K_per_head=128 sanity gate: \u0394NLL=-0.0005 (OK)
+
+=== Sweep 3: Global W_K SVD ===
+  W_K K=1024  NLL/tok=2.4678  \u0394NLL=+0.0010
+  W_K K= 512  NLL/tok=2.7600  \u0394NLL=+0.2932
+  W_K K= 256  NLL/tok=3.2877  \u0394NLL=+0.8209
+  W_K K= 128  NLL/tok=3.8178  \u0394NLL=+1.3510
+  W_K K=  64  NLL/tok=4.0523  \u0394NLL=+1.5855
+
+Wrote experiments\stage0\ladder\track_A_arch\round3_aqfkv\aqfkv_results.json
+Wrote experiments\stage0\ladder\track_A_arch\round3_aqfkv\aqfkv_plot.png
+Wrote experiments\stage0\ladder\track_A_arch\round3_aqfkv\summary.md
+
+GLOBAL VERDICT: GO (W_Q is low-rank tolerant at K\u2264128 globally)
+PER-HEAD VERDICT: GRAY-perhead (mid-zone)
