@@ -1,0 +1,39 @@
+mlock vs default-mmap deployment comparison
+Model: C:/Users/power/documents/Nocturnal_One/models/cache/gguf/Qwen_Qwen3-4B-Thinking-2507-IQ4_XS.gguf
+Model size: 2.11 GiB
+
+=== Condition 1: default mmap (relies on NEXTENT + page cache) ===
+  evicting cache via 5120 MB pressure buffer...
+
+  Turn 0 (mmap): launching llama-cli...
+  Turn 0 (mmap): wall=13.35s  load=2119ms  decode=7.64 tok/s (130.9 ms/tok)
+
+  Turn 1 (mmap): launching llama-cli...
+  Turn 1 (mmap): wall=11.71s  load=739ms  decode=7.67 tok/s (130.4 ms/tok)
+
+  Turn 2 (mmap): launching llama-cli...
+  Turn 2 (mmap): wall=11.37s  load=1010ms  decode=8.19 tok/s (122.1 ms/tok)
+
+=== Condition 2: --mlock (model pinned in RAM, no eviction) ===
+  evicting cache via 5120 MB pressure buffer...
+
+  Turn 0 (mlock): launching llama-cli...
+  Turn 0 (mlock): wall=17.49s  load=3070ms  decode=5.84 tok/s (171.3 ms/tok)
+
+  Turn 1 (mlock): launching llama-cli...
+  Turn 1 (mlock): wall=14.48s  load=1811ms  decode=6.64 tok/s (150.7 ms/tok)
+
+  Turn 2 (mlock): launching llama-cli...
+  Turn 2 (mlock): wall=16.72s  load=2167ms  decode=5.72 tok/s (174.9 ms/tok)
+
+=== Comparison ===
+ turn    mmap load(ms)   mlock load(ms)   mmap tok/s   mlock tok/s
+    0             2119             3070         7.64          5.84
+    1              739             1811         7.67          6.64
+    2             1010             2167         8.19          5.72
+
+Avg decode tok/s:  mmap=7.83  mlock=6.06  \u0394=-22.6%
+
+VERDICT: CURIOUS — mlock is 22.6% SLOWER (7.83 \u2192 6.06 tok/s). Possibly due to mlock initial cost or reduced standby cache for KV. Investigate further.
+
+Wrote experiments\stage0\opus_pipeline\round1\test_mlock_vs_mmap.json

@@ -1,0 +1,106 @@
+{
+  "condition": "cold_pressure",
+  "model": "C:/Users/power/documents/Nocturnal_One/models/cache/gguf/Qwen_Qwen3-4B-Thinking-2507-IQ4_XS.gguf",
+  "model_size_gb": 2.1148020923137665,
+  "n_predict": 80,
+  "n_threads": 6,
+  "evict_cache_mb": 5120,
+  "sustained_pressure_mb": 3072,
+  "decode_tok_s_per_turn": [
+    7.38266009391865,
+    7.374342143338542,
+    8.056990459095475
+  ],
+  "load_ms_per_turn": [
+    2386.24,
+    1246.1,
+    882.89
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "prompt": "Question: What is the capital of France?\nAnswer:",
+      "wall_seconds": 14.33044799999334,
+      "stdout_excerpt": "Question: What is the capital of France?\nAnswer: Paris is the capital of France.\n\nQuestion: What is the capital of Germany?\nAnswer: Berlin is the capital of Germany.\n\nQuestion: What is the capital of Italy?\nAnswer: Rome is the capital of Italy.\n\nQuestion: What is the capital of Spain?\nAnswer: Madrid is the capital of Spain.\n\nQuestion: What is the capital of the United States?\nAnswer: Washington, D.C. is",
+      "timing": {
+        "load_time_ms": 2386.24,
+        "prompt_eval": {
+          "ms": 1564.74,
+          "n_tokens": 11,
+          "ms_per_token": 142.2490909090909,
+          "tok_per_sec": 7.029921903958485
+        },
+        "decode_eval": {
+          "ms": 10700.75,
+          "n_tokens": 79,
+          "ms_per_token": 135.45253164556962,
+          "tok_per_sec": 7.38266009391865
+        },
+        "total": {
+          "ms": 13113.41,
+          "n_tokens": 90,
+          "ms_per_token": 145.70455555555554,
+          "tok_per_sec": 6.863203392557695
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 1,
+      "prompt": "Question: How does the citric acid cycle relate to ATP produ...",
+      "wall_seconds": 12.816615200019442,
+      "stdout_excerpt": "Question: How does the citric acid cycle relate to ATP production?\nAnswer: The citric acid cycle is part of cellular respiration that occurs in the mitochondria. It generates energy carriers (NADH and FADH2) which are then used in the electron transport chain to produce ATP through oxidative phosphorylation. The cycle itself doesn't directly produce ATP, but it's crucial for providing the electron carriers needed for ATP synthesis.\n\nOkay, the user is asking how the",
+      "timing": {
+        "load_time_ms": 1246.1,
+        "prompt_eval": {
+          "ms": 951.21,
+          "n_tokens": 16,
+          "ms_per_token": 59.450625,
+          "tok_per_sec": 16.820681027323094
+        },
+        "decode_eval": {
+          "ms": 10712.82,
+          "n_tokens": 79,
+          "ms_per_token": 135.6053164556962,
+          "tok_per_sec": 7.374342143338542
+        },
+        "total": {
+          "ms": 11986.47,
+          "n_tokens": 95,
+          "ms_per_token": 126.17336842105263,
+          "tok_per_sec": 7.925602783805408
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 2,
+      "prompt": "Question: Write a short Python function that computes the nt...",
+      "wall_seconds": 11.35214019997511,
+      "stdout_excerpt": "Question: Write a short Python function that computes the nth Fibonacci number using memoization.\nAnswer: We'll use a dictionary to store the computed values of Fibonacci numbers to avoid recalculating them. The function will take an integer `n` as input and return the nth Fibonacci number, with the base cases of 0 and 1.\n\nLet's write the code step by step:\n\n1. Create a dictionary to store memoized results.\n2. Define a function that uses this dictionary to store",
+      "timing": {
+        "load_time_ms": 882.89,
+        "prompt_eval": {
+          "ms": 653.42,
+          "n_tokens": 19,
+          "ms_per_token": 34.39052631578947,
+          "tok_per_sec": 29.0777753971412
+        },
+        "decode_eval": {
+          "ms": 9805.15,
+          "n_tokens": 79,
+          "ms_per_token": 124.11582278481012,
+          "tok_per_sec": 8.056990459095475
+        },
+        "total": {
+          "ms": 10710.53,
+          "n_tokens": 98,
+          "ms_per_token": 109.29112244897959,
+          "tok_per_sec": 9.149874002500342
+        }
+      },
+      "returncode": 0
+    }
+  ],
+  "timestamp": "2026-05-09T01:36:01.878157+00:00"
+}

@@ -74,10 +74,17 @@ def create_sparse_file(path: Path, size_bytes: int) -> None:
     On NTFS we set the file size with SetFileValidData where possible,
     otherwise we just write data — the OS/drive should compress zeros so
     we write a deterministic pattern instead.
+
+    SAFETY: if the file already exists, NEVER overwrite it. Use whatever size
+    it has (the caller will read this back via path.stat()). This protects
+    against accidentally overwriting real content (e.g. when pointing at an
+    existing GGUF model file).
     """
     path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists() and path.stat().st_size == size_bytes:
-        print(f"  reusing existing {path} ({size_bytes / (1024**3):.1f} GiB)")
+    if path.exists():
+        actual = path.stat().st_size
+        print(f"  reusing existing {path} ({actual / (1024**3):.2f} GiB; "
+              f"requested {size_bytes / (1024**3):.2f} GiB — using actual)")
         return
     print(f"  creating {path} of size {size_bytes / (1024**3):.1f} GiB (this writes data, may take a minute)...")
     rng = random.Random(0)
@@ -225,11 +232,17 @@ def main() -> int:
 
     print(f"Page-fault benchmark on {args.file_path}")
     create_sparse_file(args.file_path, file_size)
+    # If the file already existed (e.g. real GGUF), use its actual size for the rest of the run
+    actual_size = args.file_path.stat().st_size
+    if actual_size != file_size:
+        print(f"  switching to actual file size: {actual_size / (1024**3):.2f} GiB "
+              f"(was {file_size / (1024**3):.2f} GiB)")
+        file_size = actual_size
 
     results: dict[str, Any] = {
         "platform": sys.platform,
         "file_path": str(args.file_path),
-        "file_size_gb": args.file_size_gb,
+        "file_size_gb": file_size / (1024**3),
         "n_faults_per_run": args.n_faults,
         "page_size": PAGE_SIZE,
         "extent_test_size": EXTENT_TEST_SIZE,

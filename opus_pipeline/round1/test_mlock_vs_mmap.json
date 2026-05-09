@@ -1,0 +1,178 @@
+{
+  "model": "C:/Users/power/documents/Nocturnal_One/models/cache/gguf/Qwen_Qwen3-4B-Thinking-2507-IQ4_XS.gguf",
+  "model_size_gb": 2.1148020923137665,
+  "n_predict": 80,
+  "n_threads": 6,
+  "ctx_size": 4096,
+  "mmap_results": [
+    {
+      "turn": 0,
+      "condition": "mmap",
+      "wall_seconds": 13.349770599976182,
+      "timing": {
+        "load_time_ms": 2119.38,
+        "prompt_eval": {
+          "ms": 667.49,
+          "n_tokens": 11,
+          "ms_per_token": 60.68090909090909,
+          "tok_per_sec": 16.479647635170565
+        },
+        "decode_eval": {
+          "ms": 10344.35,
+          "n_tokens": 79,
+          "ms_per_token": 130.94113924050635,
+          "tok_per_sec": 7.637019242388357
+        },
+        "total": {
+          "ms": 12488.87,
+          "n_tokens": 90,
+          "ms_per_token": 138.76522222222223,
+          "tok_per_sec": 7.206416593334705
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 1,
+      "condition": "mmap",
+      "wall_seconds": 11.706023199949414,
+      "timing": {
+        "load_time_ms": 739.34,
+        "prompt_eval": {
+          "ms": 501.78,
+          "n_tokens": 16,
+          "ms_per_token": 31.36125,
+          "tok_per_sec": 31.886484116545102
+        },
+        "decode_eval": {
+          "ms": 10302.01,
+          "n_tokens": 79,
+          "ms_per_token": 130.40518987341773,
+          "tok_per_sec": 7.6684064566040995
+        },
+        "total": {
+          "ms": 11063.02,
+          "n_tokens": 95,
+          "ms_per_token": 116.45284210526316,
+          "tok_per_sec": 8.587166976105982
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 2,
+      "condition": "mmap",
+      "wall_seconds": 11.370643600006588,
+      "timing": {
+        "load_time_ms": 1010.28,
+        "prompt_eval": {
+          "ms": 756.84,
+          "n_tokens": 19,
+          "ms_per_token": 39.833684210526314,
+          "tok_per_sec": 25.104381375191586
+        },
+        "decode_eval": {
+          "ms": 9647.23,
+          "n_tokens": 79,
+          "ms_per_token": 122.11683544303797,
+          "tok_per_sec": 8.188879087572287
+        },
+        "total": {
+          "ms": 10681.37,
+          "n_tokens": 98,
+          "ms_per_token": 108.99357142857144,
+          "tok_per_sec": 9.174853038514721
+        }
+      },
+      "returncode": 0
+    }
+  ],
+  "mlock_results": [
+    {
+      "turn": 0,
+      "condition": "mlock",
+      "wall_seconds": 17.49210219993256,
+      "timing": {
+        "load_time_ms": 3070.24,
+        "prompt_eval": {
+          "ms": 467.09,
+          "n_tokens": 11,
+          "ms_per_token": 42.46272727272727,
+          "tok_per_sec": 23.550065297908326
+        },
+        "decode_eval": {
+          "ms": 13535.79,
+          "n_tokens": 79,
+          "ms_per_token": 171.33911392405065,
+          "tok_per_sec": 5.83637896273509
+        },
+        "total": {
+          "ms": 16634.31,
+          "n_tokens": 90,
+          "ms_per_token": 184.82566666666668,
+          "tok_per_sec": 5.410503952373137
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 1,
+      "condition": "mlock",
+      "wall_seconds": 14.475589599926025,
+      "timing": {
+        "load_time_ms": 1811.36,
+        "prompt_eval": {
+          "ms": 378.41,
+          "n_tokens": 16,
+          "ms_per_token": 23.650625,
+          "tok_per_sec": 42.28218070346978
+        },
+        "decode_eval": {
+          "ms": 11905.42,
+          "n_tokens": 79,
+          "ms_per_token": 150.70151898734179,
+          "tok_per_sec": 6.635633182197688
+        },
+        "total": {
+          "ms": 13742.58,
+          "n_tokens": 95,
+          "ms_per_token": 144.65873684210527,
+          "tok_per_sec": 6.912821318849881
+        }
+      },
+      "returncode": 0
+    },
+    {
+      "turn": 2,
+      "condition": "mlock",
+      "wall_seconds": 16.719234500080347,
+      "timing": {
+        "load_time_ms": 2167.32,
+        "prompt_eval": {
+          "ms": 725.38,
+          "n_tokens": 19,
+          "ms_per_token": 38.177894736842106,
+          "tok_per_sec": 26.19316771898867
+        },
+        "decode_eval": {
+          "ms": 13820.15,
+          "n_tokens": 79,
+          "ms_per_token": 174.9386075949367,
+          "tok_per_sec": 5.716291067752521
+        },
+        "total": {
+          "ms": 16013.07,
+          "n_tokens": 98,
+          "ms_per_token": 163.39867346938775,
+          "tok_per_sec": 6.120000724408249
+        }
+      },
+      "returncode": 0
+    }
+  ],
+  "avg_mmap_tok_s": 7.8314349288549145,
+  "avg_mlock_tok_s": 6.062767737561766,
+  "delta_pct": -22.584203372187844,
+  "verdict": "CURIOUS \u2014 mlock is 22.6% SLOWER (7.83 \u2192 6.06 tok/s). Possibly due to mlock initial cost or reduced standby cache for KV. Investigate further.",
+  "timestamp": "2026-05-09T01:40:55.076021+00:00"
+}

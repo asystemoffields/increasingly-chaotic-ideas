@@ -1,0 +1,23 @@
+NEXTENT deployment test (cold condition)
+Model: C:/Users/power/documents/Nocturnal_One/models/cache/gguf/Qwen_Qwen3-4B-Thinking-2507-IQ4_XS.gguf
+Model size: 2.11 GiB
+llama-cli: C:/Users/power/documents/upstream/ik_llama.cpp/build/bin/llama-cli.exe
+n_predict: 80, threads: 6, ctx: 4096
+  evicting cache via 5120 MB pressure buffer...
+
+  Turn 0: launching llama-cli...
+  Turn 0: wall=10.93s  load=1901ms  decode=9.80 tok/s (102.0 ms/tok)
+
+  Turn 1: launching llama-cli...
+  Turn 1: wall=10.06s  load=688ms  decode=9.03 tok/s (110.7 ms/tok)
+
+  Turn 2: launching llama-cli...
+  Turn 2: wall=9.71s  load=796ms  decode=9.55 tok/s (104.8 ms/tok)
+
+=== Summary (cold) ===
+  Turn  load(ms)  decode(tok/s)  ms/tok  wall(s)
+     0      1901           9.80   102.0    10.93
+     1       688           9.03   110.7    10.06
+     2       796           9.55   104.8     9.71
+
+Wrote experiments\stage0\opus_pipeline\round1\test_deployment_cold.json
