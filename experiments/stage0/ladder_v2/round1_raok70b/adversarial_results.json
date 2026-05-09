@@ -1,0 +1,113 @@
+{
+  "raok_mean_delta_nll": 0.08295687024140778,
+  "timestamp": "2026-05-09T11:52:38.947399+00:00",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "flat_int4": {
+    "mean_delta_nll": 5.749997073656893,
+    "std_delta_nll": 0.1279179464412264,
+    "seed_deltas": [
+      5.573929758687775,
+      5.874013045995904,
+      5.802048416286999
+    ],
+    "seed_records": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "quant_nll": 8.337971965394141,
+        "delta_nll": 5.573929758687775
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "quant_nll": 8.8302036591472,
+        "delta_nll": 5.874013045995904
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "quant_nll": 8.637277144042013,
+        "delta_nll": 5.802048416286999
+      }
+    ],
+    "verdict": "SURVIVES",
+    "verdict_note": "Flat INT4 \u0394NLL=5.7500 nats, gap=+5.6670 over RAOK (0.0830). Gap >= 0.20 nats. Tier-0/Tier-1 shell is load-bearing. Three-tier design has structural merit.",
+    "gap_vs_raok": 5.6670402034154845
+  },
+  "random_tier0": {
+    "mean_delta_nll": 0.05714128846369452,
+    "std_delta_nll": 0.016862690885494473,
+    "seed_deltas": [
+      0.08098869547685306,
+      0.045255000343994656,
+      0.04518016957023585
+    ],
+    "seed_records": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "quant_nll": 2.845030902183219,
+        "delta_nll": 0.08098869547685306
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "quant_nll": 3.001445613495291,
+        "delta_nll": 0.045255000343994656
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "quant_nll": 2.8804088973252506,
+        "delta_nll": 0.04518016957023585
+      }
+    ],
+    "verdict": "KILL",
+    "verdict_note": "Random Tier-0 \u0394NLL=0.0571 nats, gap=0.0258 nats from RAOK (0.0830). Gap <= 0.05 nats. Any 2 FP16 channels perform equally well. CF3-derived Tier-0 channel identification is NOT load-bearing. The 'calibration-free CF3-derived Tier-0 selection' novelty COLLAPSES.",
+    "gap_vs_raok": -0.025815581777713266
+  },
+  "static_tier1": {
+    "mean_delta_nll": 0.47333096120377743,
+    "std_delta_nll": 0.06275923375003327,
+    "seed_deltas": [
+      0.5298587925980005,
+      0.5043252545560177,
+      0.385808836457314
+    ],
+    "seed_records": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "quant_nll": 3.2939009993043666,
+        "delta_nll": 0.5298587925980005
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "quant_nll": 3.460515867707314,
+        "delta_nll": 0.5043252545560177
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "quant_nll": 3.221037564212329,
+        "delta_nll": 0.385808836457314
+      }
+    ],
+    "verdict": "SURVIVES",
+    "verdict_note": "Static Tier-1 \u0394NLL=0.4733 nats, gap=0.3904 nats from RAOK (0.0830). Gap >= 0.10 nats. Per-token dynamic rotation IS load-bearing. CF3 dynamicity (K=1% Jaccard) is the genuine moat. Dynamic shell claim survives.",
+    "gap_vs_raok": 0.39037409096236964
+  },
+  "aggregate_verdict": "PARTIAL",
+  "aggregate_verdict_note": "Mixed verdict. KILLED: Tier-0 channel selection (random works equally). SURVIVING: tier-structure, Tier-1 dynamicity.",
+  "elapsed_seconds": 2880.6538071632385
+}

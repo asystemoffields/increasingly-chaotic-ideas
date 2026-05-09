@@ -1,0 +1,18 @@
+[0.0s] Memory audit:
+  Total RAM: 7.82 GB
+  Available RAM: 0.43 GB
+  FALLBACK: Qwen3-4B-Base requires ~8.82 GB BF16; system total RAM = 7.82 GB (insufficient). bitsandbytes (INT4 load) and accelerate (disk offload) are NOT available. No 4B loading strategy is feasible. Falling back to Qwen3-0.6B-Base (downward-scale alternative per task spec).
+[0.0s] Running B4 unit test ...
+B4 unit test: PASS (scale = max_abs/7 confirmed correct)
+[0.0s] Loading Qwen/Qwen3-0.6B-Base bf16 on CPU ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  45%|####5     | 141/310 [00:00<00:00, 1408.36it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 2503.52it/s]
+  Loaded: n_layers=28, d=1024
+  d=1024: absolute-count Tier-0=2, Tier-1=18, Tier-2=1004
+  d=1024: fraction-match Tier-0=1 (~0.1%), Tier-1=9 (~1%-0.1%=~0.9%), Tier-2=1014
+
+[3.6s] Building calibration corpus (200 prompts) ...
+  Corpus size: 200 prompts
+
+[3.6s] === Config: absolute-count (T0=2, T1=18) (Tier-0=2, Tier-1=18, Tier-2=1004) ===
+[3.6s] Calibration pass ...

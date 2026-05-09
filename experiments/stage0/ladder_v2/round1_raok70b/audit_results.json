@@ -1,0 +1,102 @@
+{
+  "experiment": "R-RAOK-70B Rung 2 Audit",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "timestamp": "2026-05-09T12:06:09+00:00",
+  "rung2_reference": {
+    "mean_delta_nll": 0.08295687024140778,
+    "std_delta_nll_across_seeds": 0.015906671145993815,
+    "worst_of_3_delta_nll": 0.10520973877430873,
+    "perm_gap": 5.612124388931783,
+    "seed1_delta_nll": 0.06897725144477729
+  },
+  "aggregate_verdict": "ARTIFACT",
+  "aggregate_note": "Six of seven checks PASS the artifact-possibility tests. Check 7 (noise floor) fails decisively: RAOK delta-NLL of 0.083 nats is 0.57x the noise floor (0.145 nats) — below the standard error of comparing two 512-token NLL means at this sample size. The mechanism is structurally real (Tier-2 zeroing is catastrophic, hook reaches matmul, no length scaling or corpus specificity issues), but the headline number cannot be defended at 512 tokens against noise. The reported '+/- 0.016' is std across 3 seeds, not the SEM of any single delta-NLL measurement.",
+  "kill_check": "check7",
+  "simplest_alternative_explanation": "The three-tier scheme preserves activations adequately, but the delta-NLL signal at 512 tokens is too small to measure reliably. Permutation gap (5.61 nats) confirms the method is non-trivial; the magnitude claim (0.083 < 0.30 threshold) is below resolution at this sample size and is statistically indistinguishable from zero given per-token NLL stddev=3.27.",
+  "checks": {
+    "check1_corpus_disjointness": {
+      "method": "static",
+      "verdict": "PASS",
+      "decisive_number": "0% overlap",
+      "evidence": "Calibration prompts are 200 hardcoded Python strings (REPETITIVE/TECHNICAL/PROSE/RANDOM, 50 each, max 32 tokens) embedded in rraok_rung1.py and rraok_rung2.py. Eval corpus is HuggingFace wikitext-2-raw-v1 'test' split. No path of overlap."
+    },
+    "check2_hook_placement": {
+      "method": "static + corroborated by check3",
+      "verdict": "PASS",
+      "decisive_number": "Tier-2 zeroing produces 12.28 nat delta-NLL, confirming hook reaches matmul",
+      "evidence": "register_forward_pre_hook on model.model.layers[L].mlp returns (h_replaced,) + inputs[1:], which PyTorch uses to REPLACE the module input. Both W_gate and W_up see the same quantized tensor (B3). Check 3 (Tier-2 zero -> 12.28 nats) is independent confirmation that the hook is modifying the forward pass."
+    },
+    "check3_tier2_zero_degeneracy": {
+      "method": "model_run",
+      "verdict": "PASS",
+      "t2zero_seeds": [
+        {"seed": 0, "offset": 0,    "baseline_nll": 2.7640, "t2zero_nll": 15.4960, "delta_nll": 12.7319},
+        {"seed": 1, "offset": 512,  "baseline_nll": 2.9562, "t2zero_nll": 14.8680, "delta_nll": 11.9118},
+        {"seed": 2, "offset": 1024, "baseline_nll": 2.8352, "t2zero_nll": 15.0322, "delta_nll": 12.1970}
+      ],
+      "t2zero_mean_delta_nll": 12.2802,
+      "raok_mean_delta_nll": 0.0830,
+      "diff_from_raok": 12.1973,
+      "degenerate_threshold": 0.10,
+      "decisive_number": "12.20 nats >> 0.10 threshold (NOT degenerate)",
+      "interpretation": "Bulk Tier-2 channels carry massive signal. INT4 quantization preserves it; zeroing destroys the model. Mechanism is real."
+    },
+    "check4_massive_activation_rediscovery": {
+      "method": "literature",
+      "verdict": "PASS",
+      "decisive_number": "Sun et al. 2024 covers LLaMA-2/Mistral/GPT-2/Phi-2/ViT, NOT Qwen3-1.7B",
+      "evidence": "arXiv:2402.17762 (Sun, Chen, Kolter, Liu — COLM 2024) characterizes outlier hidden-state activations as a phenomenon class but does not study Qwen3-1.7B specifically. RAOK Tier-0 channels (per-layer, e.g. [307, 1485] for L16-25) and the CF3-Jaccard identification method are not in that paper. Phenomenon class is known; the specific Qwen3 channel pattern and the Jaccard-derived tiering are not direct rediscovery."
+    },
+    "check5_eval_length_2k": {
+      "method": "model_run",
+      "verdict": "PASS",
+      "baseline_2k_nll": 2.7745,
+      "quant_2k_nll": 2.8456,
+      "delta_nll_2k": 0.0712,
+      "delta_nll_512_seed1_reference": 0.0690,
+      "decisive_number": "0.0712 nats at 2K vs 0.0690 nats at 512 (3% growth, sublinear)",
+      "interpretation": "Quantization error does not compound over 4x context length. Deployment delta-NLL at 2K is essentially identical to 512-token measurement."
+    },
+    "check6_corpus_specificity_code": {
+      "method": "model_run",
+      "verdict": "PASS",
+      "code_seeds": [
+        {"seed": 0, "offset": 0,    "baseline_nll": 1.7474, "quant_nll": 1.7769, "delta_nll": 0.0295},
+        {"seed": 1, "offset": 512,  "baseline_nll": 2.3309, "quant_nll": 2.3916, "delta_nll": 0.0606},
+        {"seed": 2, "offset": 1024, "baseline_nll": 2.3779, "quant_nll": 2.4421, "delta_nll": 0.0642}
+      ],
+      "code_mean_delta_nll": 0.0514,
+      "nl_mean_delta_nll": 0.0830,
+      "diff_code_vs_nl": 0.0315,
+      "generalization_threshold": 0.10,
+      "decisive_number": "code mean 0.0514 nats; diff from NL 0.0315 (< 0.10)",
+      "interpretation": "Tier boundaries calibrated on hardcoded prompts generalize to held-out code. Code delta-NLL is slightly lower than NL — consistent with code's lower intrinsic dim per M-Strat."
+    },
+    "check7_noise_floor": {
+      "method": "model_run",
+      "verdict": "FAIL",
+      "per_token_nll_stddev": 3.2726,
+      "n_tokens": 511,
+      "noise_floor_sem": 0.1448,
+      "raok_mean_delta_nll": 0.0830,
+      "ratio_dnll_to_noise_floor": 0.5733,
+      "pass_threshold_x": 3.0,
+      "decisive_number": "ratio = 0.57x (need > 3x for PASS; FAIL by ~5x)",
+      "interpretation": "Per-token NLL stddev on baseline seed 1 is 3.27 nats. By the brief's formula (stddev / sqrt(n_tokens)), the noise floor for comparing two 512-token NLL means is 0.145 nats. RAOK delta-NLL of 0.083 is BELOW this noise floor. The reported '+/- 0.016' is std across 3 seeds (chunk-to-chunk variation), not the SEM of any single delta-NLL — the latter is 9x larger.",
+      "caveat": "The brief's formula treats baseline and quantized NLLs as unpaired. In practice they are paired (same tokens), so the per-token delta-NLL stddev would be smaller. Computing this requires re-running Rung 2 with per-token delta-NLL collection (script does not save these). Even with optimistic paired-stddev assumptions, the 0.083 nat result is marginal. By the brief's stated criterion, FAIL.",
+      "remediation": "Re-run with eval window >= 8K tokens per seed (SEM drops to ~0.036 nats; ratio rises to 2.3x — still marginal) or save per-token paired delta-NLL and report SEM of differences."
+    }
+  },
+  "what_survives": [
+    "Mechanism: Tier-0/Tier-1/Tier-2 design is structurally working (check 3 + perm gap from Rung 2)",
+    "Calibration-eval separation: zero leakage",
+    "Hook correctness: end-to-end matmul replacement confirmed",
+    "Length stability: no error compounding to 2K context",
+    "Corpus generalization: works on code (lower delta-NLL than NL)",
+    "Novelty of identification method: not direct rediscovery of Sun et al."
+  ],
+  "what_collapses": [
+    "Headline number (0.083 nats) is below resolution at 512 tokens. Per-token NLL stddev=3.27 makes 0.083 indistinguishable from noise. The '+/- 0.016' across-seeds figure understates uncertainty by ~9x relative to the within-seed SEM."
+  ],
+  "audit_elapsed_seconds": 3061.77
+}

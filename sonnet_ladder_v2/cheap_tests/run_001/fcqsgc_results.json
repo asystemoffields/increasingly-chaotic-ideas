@@ -1,0 +1,183 @@
+{
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "n_layers": 28,
+  "d_hidden": 1024,
+  "n_eval_tokens": 363,
+  "baseline_loss_per_tok": 2.7943867214476863,
+  "baseline_ppl": 16.35259698033341,
+  "frobenius_norms_per_layer": [
+    45.9256477355957,
+    45.03814697265625,
+    44.044464111328125,
+    44.15622329711914,
+    43.05192565917969,
+    44.68648147583008,
+    44.21609878540039,
+    42.110511779785156,
+    43.95607376098633,
+    43.86949920654297,
+    42.406463623046875,
+    45.910457611083984,
+    44.40379333496094,
+    42.76749801635742,
+    41.990726470947266,
+    42.731143951416016,
+    46.4250373840332,
+    43.72560119628906,
+    44.514488220214844,
+    46.595645904541016,
+    48.85380935668945,
+    49.75180435180664,
+    48.9018440246582,
+    44.468894958496094,
+    47.94840621948242,
+    48.60873031616211,
+    52.58051681518555,
+    45.01337814331055
+  ],
+  "outlier_near_zero_layers": [],
+  "var_profile": {
+    "var_at_64": {
+      "mean": 0.15501369549273594,
+      "std": 0.000361082418527836,
+      "per_seed": [
+        0.1552532167445247,
+        0.15528450233465096,
+        0.1545033673990322
+      ]
+    },
+    "var_at_128": {
+      "mean": 0.2559822010822237,
+      "std": 7.850357408769873e-05,
+      "per_seed": [
+        0.2558789319532113,
+        0.2559985393018541,
+        0.2560691319916056
+      ]
+    },
+    "var_at_256": {
+      "mean": 0.41839262528871185,
+      "std": 8.29009398193341e-05,
+      "per_seed": [
+        0.4184195793772475,
+        0.4182803355095978,
+        0.4184779609792904
+      ]
+    },
+    "var_at_512": {
+      "mean": 0.6700620643434739,
+      "std": 3.0388964706385106e-05,
+      "per_seed": [
+        0.6700799126278792,
+        0.670086997443063,
+        0.6700192829594799
+      ]
+    }
+  },
+  "var128_mean_3seeds": 0.2559822010822237,
+  "var128_std_3seeds": 7.850357408769873e-05,
+  "var128_worst_of_3": 0.2558789319532113,
+  "a2_matched_spectrum_baseline_var128_mean": 0.18392302251010784,
+  "a2_matched_spectrum_baseline_var128_std": 8.09628553426497e-05,
+  "a2_gap_real_minus_baseline": 0.07205917857211586,
+  "a2_pass": false,
+  "permutation_control_var128": 0.2558789149224056,
+  "permutation_gap": 0.00010328615981808342,
+  "permutation_control_pass": false,
+  "a1_random_init_var128": 0.1396428633705228,
+  "a1_gap_real_minus_rand_init": 0.11633933771170088,
+  "a1_pass": false,
+  "svd_approx_error_frob_ratio": 0.8614721894264221,
+  "rank_sweep_results": [
+    {
+      "K": 32,
+      "K_frac_d": 0.03125,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 6.298400541695442,
+      "ppl": 543.7015862707516,
+      "delta_loss_nats": 3.504013820247756,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 1900544,
+      "compression_ratio": 30.896551724137932,
+      "wall_clock_s": 30.59475088119507
+    },
+    {
+      "K": 64,
+      "K_frac_d": 0.0625,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 5.9562286882769335,
+      "ppl": 386.1510786194967,
+      "delta_loss_nats": 3.1618419668292472,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 3801088,
+      "compression_ratio": 15.448275862068966,
+      "wall_clock_s": 29.835973739624023
+    },
+    {
+      "K": 128,
+      "K_frac_d": 0.125,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 5.472422900120856,
+      "ppl": 238.0362326526668,
+      "delta_loss_nats": 2.6780361786731697,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 7602176,
+      "compression_ratio": 7.724137931034483,
+      "wall_clock_s": 30.236322164535522
+    },
+    {
+      "K": 256,
+      "K_frac_d": 0.25,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 4.703137814010704,
+      "ppl": 110.29270806000851,
+      "delta_loss_nats": 1.9087510925630178,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 15204352,
+      "compression_ratio": 3.8620689655172415,
+      "wall_clock_s": 36.70718169212341
+    },
+    {
+      "K": 512,
+      "K_frac_d": 0.5,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 3.865112979109116,
+      "ppl": 47.70866221037047,
+      "delta_loss_nats": 1.0707262576614296,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 30408704,
+      "compression_ratio": 1.9310344827586208,
+      "wall_clock_s": 44.30344104766846
+    },
+    {
+      "K": 1024,
+      "K_frac_d": 1.0,
+      "n_eval_tokens": 362,
+      "loss_per_tok_nats": 2.792751923450449,
+      "ppl": 16.325885627322517,
+      "delta_loss_nats": -0.001634797997237314,
+      "orig_bytes_wq_all_layers": 58720256,
+      "shared_basis_bytes": 58720256,
+      "compression_ratio": 1.0,
+      "wall_clock_s": 63.57434844970703
+    }
+  ],
+  "deployment_go_at_k128": false,
+  "verdict": "NO-GO",
+  "verdict_detail": "var@128=0.2560 < 0.50. W_Q subspaces rotate independently across layers. Class-level kill: Cluster C1 (R-CROSS-Q, C-CQBAL, F-CQSGC, A-GFRS). CF-C1-KILL candidate for CF registry.",
+  "wall_clock_total_s": 591.649126291275,
+  "timestamp": "2026-05-09T06:31:31.801944+00:00",
+  "stage6_amendments_applied": [
+    "A1: random-init uses normal_(std=0.02); raw var@128 reported",
+    "A2 BLOCKING: matched-spectrum random-orientation baseline; GO requires gap > 0.20",
+    "A3: deployment GO sub-threshold \u0394NLL < 0.30 nat for HOIST cascade",
+    "A4: COMPOT (arXiv:2602.15200) cited in kill criteria context"
+  ],
+  "references": {
+    "COMPOT": "arXiv:2602.15200, Feb 2026 \u2014 single shared subspace degrades at moderate compression",
+    "BasisSharing": "arXiv:2410.03765, ICLR 2025 \u2014 requires fine-tuning",
+    "MASA": "arXiv:2508.04581, Aug 2025 \u2014 requires fine-tuning",
+    "QSVD": "arXiv:2510.16292, NeurIPS 2025 \u2014 calibration-guided adaptive rank",
+    "xKV": "arXiv:2503.18893, March 2025 \u2014 KV-Cache activations, not weights"
+  }
+}

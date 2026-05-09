@@ -1,0 +1,56 @@
+[0.0s] W4A4 Composition Test — Qwen3-1.7B-Base
+  Per-channel INT4 weights x RAOK three-tier activations
+[0.0s] Running B4 unit test ...
+B4 unit test: PASS (scale = max_abs/7 confirmed correct)
+[0.0s] Loading Qwen/Qwen3-1.7B-Base bf16 on CPU ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 4528.76it/s]
+  n_layers=28  d=2048
+
+[2.8s] Calibration pass (200 prompts, FP model) ...
+[1081.3s] Calibration done.
+
+[1081.3s] Building W4 model ...
+[1081.3s] Creating deep copy of model for W4 quantization ...
+  W4 quantized 1,056,964,608 weight params across 28 layers (gate_proj + up_proj + down_proj)
+[1095.0s] W4 model ready.
+
+[1095.0s] Starting 3-mode x 3-seed evaluation ...
+
+[1095.0s] --- Seed 1/3 (offset=0) ---
+Token indices sequence length is longer than the specified maximum sequence length for this model (298939 > 131072). Running this sequence through the model will result in indexing errors
+[1105.0s]   [1/3] Baseline (FP weights, FP activations) ...
+  Baseline NLL: 2.7640 nats
+[1216.5s]   [2/3] W4-only (INT4 weights, FP activations) ...
+  W4-only NLL: 3.3535 nats  |  \u0394NLL(W4) = 0.5894 nats
+[1381.5s]   [3/3] W4A4 (INT4 weights + RAOK activations) ...
+  W4A4 NLL: 3.4152 nats  |  \u0394NLL(W4A4) = 0.6512 nats
+
+[1559.9s] --- Seed 2/3 (offset=512) ---
+[1564.4s]   [1/3] Baseline (FP weights, FP activations) ...
+  Baseline NLL: 2.9562 nats
+[1688.2s]   [2/3] W4-only (INT4 weights, FP activations) ...
+  W4-only NLL: 3.5349 nats  |  \u0394NLL(W4) = 0.5787 nats
+[1862.1s]   [3/3] W4A4 (INT4 weights + RAOK activations) ...
+  W4A4 NLL: 3.6495 nats  |  \u0394NLL(W4A4) = 0.6933 nats
+
+[2023.8s] --- Seed 3/3 (offset=1024) ---
+[2026.6s]   [1/3] Baseline (FP weights, FP activations) ...
+  Baseline NLL: 2.8352 nats
+[2109.7s]   [2/3] W4-only (INT4 weights, FP activations) ...
+  W4-only NLL: 3.4376 nats  |  \u0394NLL(W4) = 0.6024 nats
+[2190.3s]   [3/3] W4A4 (INT4 weights + RAOK activations) ...
+  W4A4 NLL: 3.5347 nats  |  \u0394NLL(W4A4) = 0.6994 nats
+
+[2273.8s] === Results Summary ===
+  Baseline NLL: 2.8518 nats
+  W4-only  \u0394NLL: 0.5902 ± 0.0097 nats (worst=0.6024)
+  W4A4     \u0394NLL: 0.6813 ± 0.0214 nats (worst=0.6994)
+  RAOK-only \u0394NLL reference: 0.0830 nats (from Rung 2)
+  Composition delta: 0.0081 nats
+    = (W4A4 \u0394NLL=0.6813) - (W4 \u0394NLL=0.5902) - (RAOK \u0394NLL=0.0830)
+
+  VERDICT: COMPOSES CLEANLY
+  Composition delta=0.0081 nats < 0.10. W4-only \u0394NLL=0.5902, W4A4 \u0394NLL=0.6813. W4 and RAOK stack approximately additively. Deployment arithmetic holds: predicted W4A4 NLL penalty \u2248 W4 + RAOK.
+
+Wrote experiments\stage0\ladder_v2\round1_raok70b\w4a4_composition_results.json
+Wrote sonnet_ladder_v2\cheap_tests\run_001\rraok_w4a4_composition_result.md

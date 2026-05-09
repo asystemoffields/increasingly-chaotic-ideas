@@ -1,0 +1,78 @@
+{
+  "raok_mean_delta_nll": 0.08295687024140778,
+  "raok_std_delta_nll": 0.015906671145993815,
+  "timestamp": "2026-05-09T13:58:40.426258+00:00",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "script": "rraok_sharp_ablations_v2.py",
+  "bug_fix_note": "v1 used scale_c = |h[c]|/7 per token \u2014 degenerate, gives \u0394NLL=0. v2 uses calibration-derived max_abs_L_c / 7 \u2014 proper SmoothQuant-class per-channel INT4.",
+  "per_channel_all_fixed": {
+    "mean_delta_nll": 0.10743208734023375,
+    "std_delta_nll": 0.0330029513365289,
+    "seed_deltas": [
+      0.11760859480109476,
+      0.14179153591686067,
+      0.06289613130274585
+    ],
+    "seed_records": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "quant_nll": 2.881650801507461,
+        "delta_nll": 0.11760859480109476
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "quant_nll": 3.097982149068157,
+        "delta_nll": 0.14179153591686067
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "quant_nll": 2.8981248590577606,
+        "delta_nll": 0.06289613130274585
+      }
+    ],
+    "verdict": "COLLAPSES-TO-PER-CHANNEL-INT4",
+    "verdict_note": "P1-fixed calibration-scale per-channel-all \u0394NLL=0.1074 nats, gap=+0.0245 nats from RAOK (0.0830). |gap| <= 0.05 nats. RAOK's FP16 Tier-0 and INT8 Tier-1 shell are NOT load-bearing beyond plain calibration-derived per-channel INT4. RAOK reduces to SmoothQuant-class per-channel INT4 activation quantization \u2014 prior art.",
+    "gap_vs_raok": 0.02447521709882597
+  },
+  "minimal_raok_fixed": {
+    "mean_delta_nll": 0.10304456338801578,
+    "std_delta_nll": 0.01832904692387573,
+    "seed_deltas": [
+      0.10277938096257344,
+      0.08072992313631389,
+      0.12562438606516002
+    ],
+    "seed_records": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "quant_nll": 2.8668215876689396,
+        "delta_nll": 0.10277938096257344
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "quant_nll": 3.03692053628761,
+        "delta_nll": 0.08072992313631389
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "quant_nll": 2.960853113820175,
+        "delta_nll": 0.12562438606516002
+      }
+    ],
+    "verdict": "TIER1-NOT-LOAD-BEARING",
+    "verdict_note": "P2-fixed minimal-RAOK \u0394NLL=0.1030 nats, gap=+0.0201 nats from RAOK (0.0830). |gap| <= 0.05 nats. Tier-1 INT8 dynamic shell is NOT load-bearing. RAOK = Tier-0 FP16 bypass + calibration-scale per-channel INT4 for the rest. Combined with P1 verdict: if P1 also collapses, RAOK is fully prior art.",
+    "gap_vs_raok": 0.020087693146607993
+  }
+}

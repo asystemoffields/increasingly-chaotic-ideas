@@ -1,0 +1,180 @@
+Args: {'model_id': 'Qwen/Qwen3-1.7B-Base', 'device': 'cpu', 'max_length': 512, 'n_tokens_target': 4000, 'probe_every_n_layers': 2, 'top_k_strip': 2, 'exclude_first_tokens': 4, 'output_json': WindowsPath('opus_pipeline/round1/m_strat_v2_controls.json'), 'baseline': True, 'permute': True, 'random_init': False, 'multi_seed': 5, 'multi_seed_tokens': 2500, 'strat_prompt_dist': True, 'cross_scale': False, 'cross_scale_model_id': 'Qwen/Qwen3-0.6B-Base', 'seed': 20260509}
+Output: opus_pipeline\round1\m_strat_v2_controls.json
+Loading TRAINED weights from Qwen/Qwen3-1.7B-Base ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  58%|#####8    | 181/310 [00:00<00:00, 1622.36it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 1881.81it/s]
+  d=2048 n_layers=28 probe_layers=[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 27]
+  using 104 passages × 13x
+
+--- collecting activations once for baseline + permute ---
+    passage 25/104  total_tokens=837  elapsed=124s  rate=7 tok/s
+    passage 50/104  total_tokens=1655  elapsed=217s  rate=8 tok/s
+    passage 75/104  total_tokens=2472  elapsed=315s  rate=8 tok/s
+    passage 100/104  total_tokens=3265  elapsed=426s  rate=8 tok/s
+  total tokens collected: 3354
+
+=== Running baseline measurement ===
+  using cached activations  total tokens: 3354
+  [baseline] layer | top-K chans       | k_99 raw | k_99 stripped | PR raw | PR stripped
+      0 | [784, 1371]       |      173 |           173 |   51.0 |        51.6
+      2 | [1999, 2033]      |      210 |           211 |   86.3 |        93.9
+      4 | [1999, 1793]      |      219 |           219 |   98.0 |       101.5
+      6 | [1999, 1793]      |      218 |           218 |   93.5 |        98.3
+      8 | [1999, 1793]      |      219 |           220 |   66.5 |        68.6
+     10 | [1999, 1793]      |      219 |           220 |   60.4 |        62.0
+     12 | [1999, 1793]      |      218 |           218 |   57.2 |        62.0
+     14 | [1999, 1793]      |      222 |           223 |   59.5 |        65.4
+     16 | [1999, 1793]      |      228 |           228 |   67.2 |        71.7
+     18 | [1999, 1683]      |      227 |           228 |   71.3 |        78.3
+     20 | [1999, 1683]      |      229 |           229 |   70.8 |        78.3
+     22 | [1999, 1683]      |      227 |           227 |   53.6 |        59.7
+     24 | [1999, 1793]      |      225 |           227 |   42.9 |        52.3
+     26 | [1999, 1793]      |      225 |           226 |   44.8 |        52.8
+     27 | [1999, 1793]      |      223 |           225 |   36.3 |        51.2
+
+=== Running permutation control (seed=20260509) ===
+  using cached activations  total tokens: 3354
+  layer | k_99 raw (perm) | k_99 stripped (perm) | k_99 stripped/d (perm)
+      0 |            1842 |                 1840 | 0.8984
+      2 |            1763 |                 1766 | 0.8623
+      4 |            1777 |                 1778 | 0.8682
+      6 |            1763 |                 1765 | 0.8618
+      8 |            1772 |                 1774 | 0.8662
+     10 |            1765 |                 1767 | 0.8628
+     12 |            1735 |                 1739 | 0.8491
+     14 |            1754 |                 1757 | 0.8579
+     16 |            1760 |                 1762 | 0.8604
+     18 |            1756 |                 1760 | 0.8594
+     20 |            1785 |                 1789 | 0.8735
+     22 |            1802 |                 1806 | 0.8818
+     24 |            1812 |                 1818 | 0.8877
+     26 |            1816 |                 1821 | 0.8892
+     27 |            1809 |                 1817 | 0.8872
+
+=== Running multi-seed control (N=5, bootstrap-resample) ===
+  cached pool: 3354 tokens; per-seed bootstrap sample size: 2500
+  -- seed 0 -- bootstrap sample 2500 of 3354 (replacement; first 5 idx: [82, 1992, 661, 1926, 2787])
+    seed 0: median k_99_stripped middle=218.0
+  -- seed 1 -- bootstrap sample 2500 of 3354 (replacement; first 5 idx: [1182, 2070, 236, 1863, 2557])
+    seed 1: median k_99_stripped middle=219.0
+  -- seed 2 -- bootstrap sample 2500 of 3354 (replacement; first 5 idx: [2856, 936, 2722, 722, 3346])
+    seed 2: median k_99_stripped middle=219.0
+  -- seed 3 -- bootstrap sample 2500 of 3354 (replacement; first 5 idx: [1799, 2912, 1309, 738, 2747])
+    seed 3: median k_99_stripped middle=219.0
+  -- seed 4 -- bootstrap sample 2500 of 3354 (replacement; first 5 idx: [2139, 2716, 1508, 2989, 1879])
+    seed 4: median k_99_stripped middle=219.0
+  middle-layer mean of means k_99_stripped: 219.58
+  middle-layer mean of stds: 0.60
+  middle-layer max stddev: 0.80
+
+=== Running prompt-distribution stratification ===
+  -- stratum 'natural_language' -- 66 passages (reps=11)
+
+=== Running strat[natural_language] measurement ===
+    passage 25/66  total_tokens=831  elapsed=108s  rate=8 tok/s
+    passage 50/66  total_tokens=1643  elapsed=222s  rate=7 tok/s
+  total tokens: 2112
+  [strat[natural_language]] layer | top-K chans       | k_99 raw | k_99 stripped | PR raw | PR stripped
+      0 | [784, 1371]       |      133 |           133 |   46.0 |        46.5
+      2 | [1999, 2033]      |      160 |           160 |   76.1 |        81.0
+      4 | [1999, 1793]      |      166 |           166 |   80.8 |        83.6
+      6 | [1999, 1793]      |      165 |           165 |   75.4 |        78.5
+      8 | [1999, 1793]      |      166 |           166 |   54.8 |        56.0
+     10 | [1999, 1793]      |      166 |           166 |   49.8 |        50.3
+     12 | [1999, 1793]      |      165 |           165 |   48.3 |        50.5
+     14 | [1999, 1793]      |      168 |           169 |   50.3 |        52.9
+     16 | [1999, 1793]      |      172 |           172 |   56.7 |        57.6
+     18 | [1999, 1683]      |      170 |           171 |   60.3 |        63.0
+     20 | [1999, 1683]      |      172 |           172 |   59.0 |        63.0
+     22 | [1999, 1683]      |      170 |           170 |   42.8 |        45.9
+     24 | [1999, 1793]      |      169 |           170 |   36.2 |        42.1
+     26 | [1999, 1793]      |      169 |           170 |   36.6 |        41.4
+     27 | [1999, 1793]      |      168 |           169 |   32.6 |        41.9
+  -- stratum 'code_like' -- 68 passages (reps=34)
+
+=== Running strat[code_like] measurement ===
+Args: {'model_id': 'Qwen/Qwen3-1.7B-Base', 'device': 'cpu', 'max_length': 512, 'n_tokens_target': 8000, 'probe_every_n_layers': 2, 'top_k_strip': 2, 'exclude_first_tokens': 4, 'output_json': WindowsPath('opus_pipeline/round1/m_strat_v2_controls.json'), 'baseline': False, 'permute': False, 'random_init': True, 'multi_seed': 0, 'multi_seed_tokens': 2500, 'strat_prompt_dist': True, 'cross_scale': False, 'cross_scale_model_id': 'Qwen/Qwen3-0.6B-Base', 'seed': 20260509}
+Output: opus_pipeline\round1\m_strat_v2_controls.json
+Loading TRAINED weights from Qwen/Qwen3-1.7B-Base ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 3173.69it/s]
+  d=2048 n_layers=28 probe_layers=[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 27]
+  using 216 passages × 27x
+
+=== Running prompt-distribution stratification ===
+  -- stratum 'natural_language' -- 108 passages (reps=18)
+
+=== Running strat[natural_language] measurement ===
+    passage 25/108  total_tokens=831  elapsed=120s  rate=7 tok/s
+    passage 50/108  total_tokens=1643  elapsed=237s  rate=7 tok/s
+    passage 75/108  total_tokens=2430  elapsed=348s  rate=7 tok/s
+    passage 100/108  total_tokens=3223  elapsed=460s  rate=7 tok/s
+  total tokens: 3456
+  [strat[natural_language]] layer | top-K chans       | k_99 raw | k_99 stripped | PR raw | PR stripped
+      0 | [784, 1371]       |      133 |           133 |   46.0 |        46.5
+      2 | [1999, 2033]      |      160 |           160 |   76.1 |        81.0
+      4 | [1999, 1793]      |      166 |           166 |   80.8 |        83.6
+      6 | [1999, 1793]      |      165 |           165 |   75.4 |        78.5
+      8 | [1999, 1793]      |      166 |           166 |   54.8 |        56.0
+     10 | [1999, 1793]      |      166 |           166 |   49.8 |        50.3
+     12 | [1999, 1793]      |      165 |           165 |   48.3 |        50.5
+     14 | [1999, 1793]      |      168 |           169 |   50.3 |        52.9
+     16 | [1999, 1793]      |      172 |           172 |   56.7 |        57.6
+     18 | [1999, 1683]      |      170 |           171 |   60.3 |        63.0
+     20 | [1999, 1683]      |      172 |           172 |   59.0 |        63.0
+     22 | [1999, 1683]      |      170 |           170 |   42.8 |        45.9
+     24 | [1999, 1793]      |      169 |           170 |   36.2 |        42.1
+     26 | [1999, 1793]      |      169 |           170 |   36.6 |        41.4
+     27 | [1999, 1793]      |      168 |           169 |   32.6 |        41.9
+  -- stratum 'code_like' -- 110 passages (reps=55)
+
+=== Running strat[code_like] measurement ===
+    passage 25/110  total_tokens=835  elapsed=118s  rate=7 tok/s
+    passage 50/110  total_tokens=1650  elapsed=235s  rate=7 tok/s
+    passage 75/110  total_tokens=2485  elapsed=351s  rate=7 tok/s
+    passage 100/110  total_tokens=3300  elapsed=467s  rate=7 tok/s
+  total tokens: 3630
+  [strat[code_like]] layer | top-K chans       | k_99 raw | k_99 stripped | PR raw | PR stripped
+      0 | [784, 920]        |       50 |            50 |   29.4 |        29.5
+      2 | [1999, 2033]      |       56 |            56 |   31.1 |        32.5
+      4 | [1999, 1793]      |       57 |            57 |   36.5 |        36.8
+      6 | [1999, 1793]      |       57 |            57 |   35.4 |        36.2
+      8 | [1999, 1793]      |       58 |            58 |   25.5 |        26.1
+     10 | [1999, 1793]      |       58 |            58 |   23.4 |        24.8
+     12 | [1999, 1793]      |       58 |            58 |   24.4 |        26.7
+     14 | [1999, 1793]      |       59 |            59 |   23.9 |        26.9
+     16 | [1999, 1793]      |       60 |            60 |   24.4 |        27.7
+     18 | [1999, 978]       |       60 |            60 |   26.2 |        29.0
+     20 | [1999, 1683]      |       60 |            60 |   27.1 |        28.6
+     22 | [1999, 1683]      |       60 |            60 |   23.8 |        26.1
+     24 | [1999, 1793]      |       60 |            60 |   15.7 |        17.9
+     26 | [1999, 1793]      |       60 |            60 |   18.3 |        19.4
+     27 | [1999, 1793]      |       59 |            59 |   16.3 |        19.1
+Instantiating RANDOM-INIT model with arch from Qwen/Qwen3-1.7B-Base ...
+
+=== Running random-init (seed=20260509) measurement ===
+    passage 25/216  total_tokens=837  elapsed=117s  rate=7 tok/s
+    passage 50/216  total_tokens=1655  elapsed=231s  rate=7 tok/s
+    passage 75/216  total_tokens=2472  elapsed=346s  rate=7 tok/s
+    passage 100/216  total_tokens=3265  elapsed=483s  rate=7 tok/s
+    passage 125/216  total_tokens=4064  elapsed=599s  rate=7 tok/s
+    passage 150/216  total_tokens=4858  elapsed=737s  rate=7 tok/s
+    passage 175/216  total_tokens=5655  elapsed=919s  rate=6 tok/s
+    passage 200/216  total_tokens=6450  elapsed=1104s  rate=6 tok/s
+  total tokens: 6966
+  [random-init (seed=20260509)] layer | top-K chans       | k_99 raw | k_99 stripped | PR raw | PR stripped
+      0 | [1300, 390]       |      178 |           178 |   82.3 |        82.4
+      2 | [126, 478]        |      242 |           242 |   84.6 |        84.8
+      4 | [1334, 387]       |      243 |           243 |   67.1 |        67.3
+      6 | [387, 372]        |      244 |           244 |   59.2 |        59.3
+      8 | [382, 630]        |      244 |           244 |   55.5 |        55.6
+     10 | [1121, 630]       |      244 |           244 |   52.1 |        52.3
+     12 | [1121, 99]        |      244 |           244 |   49.3 |        49.6
+     14 | [1610, 821]       |      244 |           244 |   47.0 |        47.1
+     16 | [1507, 1258]      |      244 |           244 |   45.7 |        45.8
+     18 | [1507, 1959]      |      244 |           244 |   44.4 |        44.5
+     20 | [1959, 838]       |      244 |           244 |   43.6 |        43.7
+     22 | [1959, 42]        |      244 |           244 |   42.8 |        42.8
+     24 | [1959, 1022]      |      245 |           245 |   42.6 |        42.7
+     26 | [1959, 42]        |      245 |           245 |   42.1 |        42.2
+     27 | [1375, 1959]      |      245 |           245 |   41.9 |        42.0
+
+Wrote opus_pipeline\round1\m_strat_v2_controls.json

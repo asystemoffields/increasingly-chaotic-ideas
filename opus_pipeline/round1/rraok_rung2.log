@@ -1,0 +1,88 @@
+[0.0s] Running B4 unit test ...
+B4 unit test: PASS (scale = max_abs/7 confirmed correct)
+[0.0s] Loading Qwen/Qwen3-1.7B-Base bf16 on CPU ...
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 6375.82it/s]
+  n_layers=28  d=2048
+  Tier-0: 2 channels (FP16), Tier-1: 18 channels (INT8), Tier-2: 2028 channels (INT4)
+
+[2.2s] Calibration pass (200 prompts, all 28 layers) ...
+  Calibration corpus size: 200 prompts
+[446.4s] Calibration done.
+  L 0 Tier-0 channels: [329, 2033]
+  L 1 Tier-0 channels: [425, 1536]
+  L 2 Tier-0 channels: [1536, 2033]
+  L 3 Tier-0 channels: [319, 2033]
+  L 4 Tier-0 channels: [319, 2033]
+  L 5 Tier-0 channels: [559, 1945]
+  L 6 Tier-0 channels: [1485, 1945]
+  L 7 Tier-0 channels: [1485, 1945]
+  L 8 Tier-0 channels: [1485, 1945]
+  L 9 Tier-0 channels: [1485, 1945]
+  L10 Tier-0 channels: [1485, 1945]
+  L11 Tier-0 channels: [1485, 1945]
+  L12 Tier-0 channels: [144, 1485]
+  L13 Tier-0 channels: [144, 1485]
+  L14 Tier-0 channels: [144, 1485]
+  L15 Tier-0 channels: [144, 1485]
+  L16 Tier-0 channels: [307, 1485]
+  L17 Tier-0 channels: [307, 1485]
+  L18 Tier-0 channels: [307, 1485]
+  L19 Tier-0 channels: [307, 1485]
+  L20 Tier-0 channels: [307, 1485]
+  L21 Tier-0 channels: [307, 1485]
+  L22 Tier-0 channels: [307, 1485]
+  L23 Tier-0 channels: [307, 1485]
+  L24 Tier-0 channels: [307, 1485]
+  L25 Tier-0 channels: [307, 1485]
+  L26 Tier-0 channels: [1401, 1960]
+  L27 Tier-0 channels: [784, 1401]
+
+[446.4s] Starting multi-seed evaluation (3 seeds) ...
+
+[446.4s] --- Seed 1/3 (offset=0) ---
+C:\Users\power\AppData\Local\Programs\Python\Python312\Lib\site-packages\huggingface_hub\file_download.py:129: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\power\.cache\huggingface\hub\datasets--wikitext. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]Generating test split: 100%|##########| 4358/4358 [00:00<00:00, 70430.03 examples/s]
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]Generating train split: 100%|##########| 36718/36718 [00:00<00:00, 1039495.49 examples/s]
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]Generating validation split: 100%|##########| 3760/3760 [00:00<00:00, 253184.08 examples/s]
+Token indices sequence length is longer than the specified maximum sequence length for this model (298939 > 131072). Running this sequence through the model will result in indexing errors
+  Loaded 512 eval tokens
+[458.1s]   Baseline forward pass ...
+  Baseline NLL: 2.7640 nats
+[540.3s]   Three-tier quantized forward pass ...
+  Quantized NLL: 2.8330 nats  |  \u0394NLL = 0.0690 nats
+  Tier-1 cross-token Jaccard (mean across layers): 0.3564
+  (Rung 1 K=1% reference: 0.388; Tier-1 K=18/2048\u22480.88% expected to be similar)
+
+[624.7s] --- Seed 2/3 (offset=512) ---
+  Loaded 512 eval tokens
+[627.3s]   Baseline forward pass ...
+  Baseline NLL: 2.9562 nats
+[699.1s]   Three-tier quantized forward pass ...
+  Quantized NLL: 3.0309 nats  |  \u0394NLL = 0.0747 nats
+
+[775.3s] --- Seed 3/3 (offset=1024) ---
+  Loaded 512 eval tokens
+[778.0s]   Baseline forward pass ...
+  Baseline NLL: 2.8352 nats
+[849.6s]   Three-tier quantized forward pass ...
+  Quantized NLL: 2.9404 nats  |  \u0394NLL = 0.1052 nats
+
+[940.5s] Multi-seed \u0394NLL summary:
+  Seed 1 (offset=0): \u0394NLL = 0.0690 nats
+  Seed 2 (offset=512): \u0394NLL = 0.0747 nats
+  Seed 3 (offset=1024): \u0394NLL = 0.1052 nats
+  Mean \u0394NLL: 0.0830 ± 0.0159 nats
+  Worst-of-3 \u0394NLL: 0.1052 nats
+
+[940.5s] Permutation control (offset=0) ...
+  Permutation control \u0394NLL: 5.6811 nats
+  Three-tier \u0394NLL (seed 0): 0.0690 nats
+  Permutation gap (perm - three-tier): 5.6121 nats
+
+[1110.0s] VERDICT: GO
+  mean \u0394NLL=0.0830 < 0.30 nats, worst-of-3=0.1052 < 0.50 nats, perm-gap=5.6121 > 0.50 nats. Cluster C2 advances. Calibration-free CF3-derived tiers are structurally validated.
+
+Wrote experiments\stage0\ladder_v2\round1_raok70b\rung2_results.json
+Wrote sonnet_ladder_v2\cheap_tests\run_001\rraok_rung2_result.md

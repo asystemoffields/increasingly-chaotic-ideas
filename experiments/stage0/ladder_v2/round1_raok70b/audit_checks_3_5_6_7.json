@@ -1,0 +1,93 @@
+{
+  "experiment": "R-RAOK-70B Audit: Check 3 / Check 5 / Check 6 / Check 7",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "timestamp": "2026-05-09T12:06:09.016531+00:00",
+  "rung2_reference_mean_delta_nll": 0.08295687024140778,
+  "rung2_reference_seed1_delta_nll": 0.06897725144477729,
+  "check3": {
+    "description": "Tier-2 channels set to zero instead of INT4",
+    "seeds": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 2.764042206706366,
+        "t2zero_nll": 15.495979085127201,
+        "t2zero_delta_nll": 12.731936878420836
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.9561906131512963,
+        "t2zero_nll": 14.867982509784737,
+        "t2zero_delta_nll": 11.91179189663344
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.8352287277550148,
+        "t2zero_nll": 15.03224376223092,
+        "t2zero_delta_nll": 12.197015034475905
+      }
+    ],
+    "t2zero_mean_delta_nll": 12.28024793651006,
+    "t2zero_worst_delta_nll": 12.731936878420836,
+    "raok_mean_delta_nll": 0.08295687024140778,
+    "diff_from_raok": 12.197291066268653,
+    "degenerate_threshold": 0.1,
+    "degenerate": false,
+    "verdict": "PASS (Tier-2 zeroing catastrophic \u2014 bulk channels do carry signal)"
+  },
+  "check7": {
+    "description": "Noise floor: per-token NLL stddev on baseline seed 1, 512 tokens",
+    "per_token_nll_stddev": 3.2725977988784556,
+    "n_tokens": 511,
+    "noise_floor_sem": 0.14477120320811412,
+    "raok_mean_delta_nll": 0.08295687024140778,
+    "ratio_dnll_to_noise_floor": 0.5733184373737942,
+    "pass_threshold": 3.0,
+    "verdict": "FAIL (ratio=0.57x <= 3.0 \u2014 result may not be statistically significant)"
+  },
+  "check5": {
+    "description": "2048-token eval-length scaling (seed 1 / offset 0)",
+    "baseline_2k_nll": 2.7744607259194094,
+    "quant_2k_nll": 2.8456423134703606,
+    "delta_nll_2k": 0.07118158755095116,
+    "pass_threshold": 0.2,
+    "superlinear_threshold": 0.27590900577910915,
+    "superlinear": false,
+    "verdict": "PASS (2K DNLL=0.0712 < 0.20)"
+  },
+  "check6": {
+    "description": "Corpus specificity: code vs natural language (WikiText-2)",
+    "seeds": [
+      {
+        "seed_idx": 0,
+        "offset": 0,
+        "baseline_nll": 1.7474141279545317,
+        "quant_nll": 1.7769120845309443,
+        "delta_nll": 0.02949795657641263
+      },
+      {
+        "seed_idx": 1,
+        "offset": 512,
+        "baseline_nll": 2.3309435461831884,
+        "quant_nll": 2.3915602353687624,
+        "delta_nll": 0.060616689185573946
+      },
+      {
+        "seed_idx": 2,
+        "offset": 1024,
+        "baseline_nll": 2.377892003367325,
+        "quant_nll": 2.442104511298312,
+        "delta_nll": 0.06421250793098698
+      }
+    ],
+    "code_mean_delta_nll": 0.05144238456432452,
+    "nl_mean_delta_nll": 0.08295687024140778,
+    "diff_code_vs_nl": 0.031514485677083266,
+    "generalization_threshold": 0.1,
+    "within_threshold": true,
+    "verdict": "PASS (code DNLL=0.0514, diff from NL=0.0315 <= 0.10 \u2014 generalizes)"
+  },
+  "elapsed_seconds": 3061.7658109664917
+}

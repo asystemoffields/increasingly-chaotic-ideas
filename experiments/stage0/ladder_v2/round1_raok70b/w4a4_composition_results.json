@@ -1,0 +1,73 @@
+{
+  "experiment": "W4A4 Composition Test",
+  "model_id": "Qwen/Qwen3-1.7B-Base",
+  "timestamp": "2026-05-09T14:42:34.687998+00:00",
+  "elapsed_seconds": 2273.7601084709167,
+  "n_layers": 28,
+  "d_hidden": 2048,
+  "tier0_k": 2,
+  "tier1_k": 18,
+  "eval_n_tokens": 512,
+  "eval_offsets": [
+    0,
+    512,
+    1024
+  ],
+  "w4_quant_method": "per-channel INT4 (scale=max_abs(W[c,:])/7), applied to gate_proj/up_proj/down_proj",
+  "raok_method": "three-tier activation quantization (Tier0=FP16 bypass top-2, Tier1=INT8 top-18, Tier2=INT4 bulk)",
+  "raok_only_delta_nll_reference": 0.083,
+  "raok_only_source": "rraok_rung2_result.md Rung 2 mean \u0394NLL over 3 seeds",
+  "seed_results": [
+    {
+      "seed_idx": 0,
+      "offset": 0,
+      "baseline_nll": 2.764042206706366,
+      "w4_nll": 3.3534640855285285,
+      "w4a4_nll": 3.4152053265655575,
+      "delta_w4": 0.5894218788221623,
+      "delta_w4a4": 0.6511631198591914,
+      "composition_delta_seed": -0.021258758962970956
+    },
+    {
+      "seed_idx": 1,
+      "offset": 512,
+      "baseline_nll": 2.9561906131512963,
+      "w4_nll": 3.534925427222205,
+      "w4a4_nll": 3.6494664380695023,
+      "delta_w4": 0.5787348140709088,
+      "delta_w4a4": 0.693275824918206,
+      "composition_delta_seed": 0.03154101084729728
+    },
+    {
+      "seed_idx": 2,
+      "offset": 1024,
+      "baseline_nll": 2.8352287277550148,
+      "w4_nll": 3.4376009886978656,
+      "w4a4_nll": 3.534653217591885,
+      "delta_w4": 0.6023722609428508,
+      "delta_w4a4": 0.6994244898368702,
+      "composition_delta_seed": 0.014052228894019428
+    }
+  ],
+  "mean_baseline_nll": 2.8518205158708922,
+  "w4_only": {
+    "mean_delta_nll": 0.5901763179453073,
+    "std_delta_nll": 0.009664681662247314,
+    "worst_of_3_delta_nll": 0.6023722609428508
+  },
+  "w4a4": {
+    "mean_delta_nll": 0.6812878115380893,
+    "std_delta_nll": 0.021448765413297412,
+    "worst_of_3_delta_nll": 0.6994244898368702
+  },
+  "composition_delta_nll": 0.008111493592781918,
+  "composition_delta_formula": "mean_w4a4_delta - mean_w4_delta - raok_only_delta",
+  "verdict": "COMPOSES CLEANLY",
+  "verdict_note": "Composition delta=0.0081 nats < 0.10. W4-only \u0394NLL=0.5902, W4A4 \u0394NLL=0.6813. W4 and RAOK stack approximately additively. Deployment arithmetic holds: predicted W4A4 NLL penalty \u2248 W4 + RAOK.",
+  "verdict_thresholds": {
+    "COMPOSES_CLEANLY": "composition_delta < 0.10 AND w4_only_mean < 1.0",
+    "COMPOSES_WITH_SLIPPAGE": "composition_delta 0.10-0.50",
+    "DESTRUCTIVE_INTERFERENCE": "composition_delta > 0.50",
+    "W4_ALONE_FAILS": "w4_only_mean > 1.0"
+  }
+}
