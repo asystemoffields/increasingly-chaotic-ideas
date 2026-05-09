@@ -1,0 +1,36 @@
+A1-GFRS-2: Z_2^d sign-entropy gauge on W_up
+
+[0.0s] Loading TRAINED Qwen3-1.7B-Base ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 3387.15it/s]
+[1.2s] Model loaded.
+
+=== trained ===
+  n_layers x d_ffn = 28 x 6144
+  global p(sign=+) mean: 0.5002
+  global p(sign=+) std (per-row): 0.0111
+  H(global p_pos): 1.0000 bits/weight
+  H(per-row mean): 0.9996 bits/weight
+  rows with H<0.8: 0 / 172032 (0.00%)
+  rows with H<0.5: 0 / 172032 (0.00%)
+  W_gate/W_up max-abs sign-agreement: 0.5001
+
+[7.2s] Loading RANDOM-INIT same architecture ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+[149.7s] Random-init done.
+
+=== random_init ===
+  n_layers x d_ffn = 28 x 6144
+  global p(sign=+) mean: 0.4973
+  global p(sign=+) std (per-row): 0.0114
+  H(global p_pos): 1.0000 bits/weight
+  H(per-row mean): 0.9996 bits/weight
+  rows with H<0.8: 0 / 172032 (0.00%)
+  rows with H<0.5: 0 / 172032 (0.00%)
+  W_gate/W_up max-abs sign-agreement: 0.5006
+
+[154.2s] === VERDICT: NO_GO ===
+  H_per_row(trained)=1.000, H_per_row(random)=1.000. Trained sign distribution is essentially random; canonical-gauge sign-codebook compression infeasible.
+
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\experiments\stage0\ladder_v2\round1_gfrs2\a1_gfrs_2_results.json
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\sonnet_ladder_v2\cheap_tests\run_001\a1_gfrs_2_result.md

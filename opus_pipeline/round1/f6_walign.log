@@ -1,0 +1,34 @@
+F6-WALIGN: per-neuron W_gate/W_up cosine alignment test
+[0.0s] Loading Qwen3-1.7B-Base bf16 ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 3192.80it/s]
+[1.2s] Model loaded.
+  n_layers=28  d_ffn=6144  d_model=2048
+  layer  0: median |cos|=0.051, max=0.6931, >=0.99: 0.00%, >=0.90: 0.00%
+  layer  7: median |cos|=0.068, max=0.7998, >=0.99: 0.00%, >=0.90: 0.00%
+  layer 14: median |cos|=0.082, max=0.6432, >=0.99: 0.00%, >=0.90: 0.00%
+  layer 21: median |cos|=0.080, max=0.5716, >=0.99: 0.00%, >=0.90: 0.00%
+  layer 27: median |cos|=0.103, max=0.7518, >=0.99: 0.00%, >=0.90: 0.00%
+
+[3.0s] All-layer combined statistics
+  total neurons measured: 172032
+  median |cos|: 0.0708
+  mean |cos|: 0.0918
+  max |cos|: 0.9761
+  fraction |cos| >= 0.99: 0.0000% (0 / 172032)
+  fraction |cos| >= 0.95: 0.0006%
+  fraction |cos| >= 0.90: 0.0006%
+  fraction |cos| >= 0.80: 0.0122%
+  fraction |cos| >= 0.50: 0.4354%
+
+[3.0s] Random-baseline comparison (d=2048)
+  random pair |cos| median: 0.0150
+  random pair |cos| max: 0.0935
+  random pair |cos| >= 0.99 fraction: 0.000000%
+  random pair |cos| >= 0.90 fraction: 0.000000%
+
+[11.2s] VERDICT: NO_GO
+  frac_99=0.0000%, frac_90=0.0006%, random_baseline_frac_90=0.0000%. Insufficient alignment for exact-fold compression. Per-neuron alignment claim killed.
+
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\experiments\stage0\ladder_v2\round1_walign\f6_walign_results.json
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\sonnet_ladder_v2\cheap_tests\run_001\f6_walign_result.md

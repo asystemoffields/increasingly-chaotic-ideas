@@ -1,0 +1,28 @@
+F-WNORM: W_down SVD spectrum across Qwen3-1.7B-Base
+[0.0s] Loading model bf16 ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|##########| 310/310 [00:00<00:00, 3340.70it/s]
+[1.2s] Loaded.
+  n_layers=28  d_ffn=6144  d_model=2048
+  W_down shape: (2048, 6144)
+  layer  0: r_99=1925 (r_99/d=0.940), var@128=0.1557, var@256=0.2692, var@512=0.4597, var@1024=0.7399
+  layer  7: r_99=1891 (r_99/d=0.923), var@128=0.1743, var@256=0.3012, var@512=0.5052, var@1024=0.7814
+  layer 14: r_99=1869 (r_99/d=0.913), var@128=0.2263, var@256=0.3633, var@512=0.5655, var@1024=0.8163
+  layer 21: r_99=1887 (r_99/d=0.921), var@128=0.1558, var@256=0.2835, var@512=0.4920, var@1024=0.7767
+  layer 27: r_99=1945 (r_99/d=0.950), var@128=0.1577, var@256=0.2820, var@512=0.4832, var@1024=0.7589
+
+[82.2s] Aggregate
+  r_99 across layers: median=1889, min=1845, max=1945, mean=1892.6
+  r_99 / d_model: median=0.922
+  var@256 across layers: mean=0.3114
+  var@512 across layers: mean=0.5144
+  var@1024 across layers: mean=0.7853
+  layers reaching 99%var at K=256: 0/28
+  layers reaching 99%var at K=512: 0/28
+  layers reaching 99%var at K=1024: 0/28
+
+[82.2s] === VERDICT: NO_GO ===
+  99% variance requires K > 1024 in 28/28 layers. W_down is essentially full-rank like W_gate/W_up. CF8 closes to all 3 MLP matrices.
+
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\experiments\stage0\ladder_v2\round1_wnorm\f_wnorm_results.json
+Wrote C:\Users\power\documents\increasingly-chaotic-ideas\sonnet_ladder_v2\cheap_tests\run_001\f_wnorm_result.md
